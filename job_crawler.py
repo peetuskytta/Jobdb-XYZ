@@ -7,21 +7,23 @@ page_found = True
 page_number = 1
 
 while page_found:
-	if page_number == 1:
-		response = requests.get(baseurl)
-	else:
-		url = baseurl + "&sivu=" + str(index)
-		index += 1
-	if response.status_code == 200:
+    if page_number == 1:
+        response = requests.get(baseurl)
+    else:
+        url = baseurl + "&sivu=" + str(index)
+        response = requests.get(url)
+        index += 1
 
-	if response.status_code == 404:
-		print(f"Page {page_number}")
+    if response.status_code == 200:
+        html = response.content
+        soup = BeautifulSoup(html, 'html.parser')
+        div_job = soup.find_all('h3', class_='job-box__title')
+        for h3 in div_job:
+            print(h3.text)
+    else:
+        if response.status_code == 404:
+            print(f"Page {page_number}: not found")
+            page_found = False
 
-html = response.content
-
-soup = BeautifulSoup(html, 'html.parser')
-
-div_outer = soup.find_all('h3', class_='job-box__title')
-for h3 in div_outer:
-	print(h3)
-	#print(div_outer)
+    response = None
+    page_number += 1
