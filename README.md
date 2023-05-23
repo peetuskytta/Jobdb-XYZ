@@ -25,3 +25,5 @@ Peetu Notes:
 Ale Notes:
 -- Ale = Bestest
 
+BEST PRACTISES:
+--	always `git pull` first on main branch before making any changes
