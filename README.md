@@ -9,3 +9,15 @@ To-Do:
 	2. Send the revelant info to a file.
 	3. Use further parsing and choose what interests you.
 	4. next steps?
+	5. Ales: URl-generator. Function that generates valid url from a file that includes wanted job titles
+
+
+Notes:
+--	https://realpython.com/beautiful-soup-web-scraper-python/
+--	study webcrawler detectors
+
+Peetu Notes:
+-- Peetu = best
+
+Ale Notes:
+
