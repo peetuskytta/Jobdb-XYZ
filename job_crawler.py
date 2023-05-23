@@ -17,9 +17,10 @@ while page_found:
     if response.status_code == 200:
         html = response.content
         soup = BeautifulSoup(html, 'html.parser')
-        div_job = soup.find_all('h3', class_='job-box__title')
-        for h3 in div_job:
-            print(h3.text)
+        div_job = soup.find_all('div', class_='grid grid--middle job-box job-box--lg')
+        for div in div_job:
+            print(div)
+            break
     else:
         if response.status_code == 404:
             print(f"Page {page_number}: not found")
