@@ -20,7 +20,7 @@ while page_found:
         div_job = soup.find_all('div', class_='grid grid--middle job-box job-box--lg')
         for div in div_job:
             print(div)
-##            print(h3.text)
+            break
     else:
         if response.status_code == 404:
             print(f"Page {page_number}: not found")
