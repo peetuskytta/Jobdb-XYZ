@@ -26,4 +26,5 @@ Ale Notes:
 -- Ale = Bestest
 
 BEST PRACTISES:
+--	always `git branch` to check on which branch you're on to avoid mistakes
 --	always `git pull` first on main branch before making any changes
