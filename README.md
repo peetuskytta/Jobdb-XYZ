@@ -1,8 +1,11 @@
 # Crawler
 Python job posting webcrawler to list interesting job postings.
 
+To create the virtual environment use this: `python3 -m venv myenv`
 
-To activate the virtual environment use this 'source venv/bin/activate'
+To activate the virtual environment use this `source venv/bin/activate`
+
+To deactivate the virtual use this `deactivate`
 
 To-Do:
 	1. get all the duunitori pages with keywords: software developer, system specialist, ohjelmoija, etc. to be parsed and printed out to stdout.
