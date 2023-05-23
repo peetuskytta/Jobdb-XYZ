@@ -18,6 +18,7 @@ To-Do:
 Notes:
 --	https://realpython.com/beautiful-soup-web-scraper-python/
 --	study webcrawler detectors
+--	consider possibility of being able to communicate with the program via email to change and update desired keywords
 
 Peetu Notes:
 -- Peetu = best
