@@ -19,6 +19,7 @@ Notes:
 --	https://realpython.com/beautiful-soup-web-scraper-python/
 --	study webcrawler detectors
 --	consider possibility of being able to communicate with the program via email to change and update desired keywords
+-- Let's use also "rule out"-rules to filter out these kind of surprises: https://duunitori.fi/tyopaikat/tyo/lavistajalevytyostokoneen-ohjelmoija-scsar-16832014 (löytyi koska sana ohjelmoija)
 
 Peetu Notes:
 -- Peetu = best
