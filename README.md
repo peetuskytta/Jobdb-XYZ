@@ -28,3 +28,4 @@ Ale Notes:
 BEST PRACTISES:
 --	always `git branch` to check on which branch you're on to avoid mistakes
 --	always `git pull` first on main branch before making any changes
+--	you can check new Notes by using `git checkout <branch>` without having to merge
