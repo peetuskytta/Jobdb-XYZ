@@ -3,10 +3,16 @@ Python job posting webcrawler to list interesting job postings.
 
 To create the virtual environment use this: `python3 -m venv myenv`
 
-To activate the virtual environment use this `source venv/bin/activate`
+To activate the virtual environment use this `source myvenv/bin/activate`
 
 To deactivate the virtual use this `deactivate`
 
+## Init script
+
+Let's have a script that would be run to install the above venv and libraries required by the project?
+
+
+## To-Do
 To-Do:
 	1. get all the duunitori pages with keywords: software developer, system specialist, ohjelmoija, etc. to be parsed and printed out to stdout.
 	2. Send the revelant info to a file.
@@ -23,9 +29,7 @@ Notes:
 
 Peetu Notes:
 -- Peetu = best
--- Updated the logic for saving the relevant data of a job. Useful when deciding and ranking the jobs.
--- peetu.notes in branch peetu contain
-information about the server email communication etc. (from chatGPT)
+-- added folder called database where all required databases would be created.
 
 Ale Notes:
 -- Ale = Bestest

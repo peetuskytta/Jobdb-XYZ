@@ -53,7 +53,10 @@ accepting emails from any sender while still maintaining a level of security for
 class_='grid grid--middle job-box job-box--lg'
 
 
-NOTES about SQLite
+NOTES about SQLite (https://www.youtube.com/watch?v=HQKwgk6XkIA)
 - We should add the search results in an SQLite database (opportunity to learn SQL)
 - This enables more control of search results and rankings of the results
 - user id etc...
+
+Idea: create X amount of databases based on the search parameters. If one similar already exists
+and is < 24h old we use that and not scrape again?
