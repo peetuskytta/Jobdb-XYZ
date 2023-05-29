@@ -24,6 +24,8 @@ Notes:
 Peetu Notes:
 -- Peetu = best
 -- Updated the logic for saving the relevant data of a job. Useful when deciding and ranking the jobs.
+-- peetu.notes in branch peetu contain
+information about the server email communication etc. (from chatGPT)
 
 Ale Notes:
 -- Ale = Bestest
