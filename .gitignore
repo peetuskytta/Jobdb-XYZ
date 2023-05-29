@@ -3,3 +3,4 @@ test
 *.txt
 notes
 /scraperenv
+__pycache__/

@@ -22,9 +22,13 @@ Notes:
 
 Peetu Notes:
 -- Peetu = best
+-- Updated the logic for saving the relevant data of a job. Useful when deciding and ranking the jobs.
 
 Ale Notes:
 -- Ale = Bestest
 
 BEST PRACTISES:
+--	always `git branch` to check on which branch you're on to avoid mistakes
 --	always `git pull` first on main branch before making any changes
+--	you can check new Notes by using `git checkout <branch>` without having to merge
+--	need to change last commit message? use `git commit --amend`
