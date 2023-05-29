@@ -4,8 +4,8 @@
 
 class Job:
     def __init__(self, title, id, url):
-        self.title = title
         self.id = id
+        self.title = title
         self.url = url
 
 	# This defines how the class job should be printed.

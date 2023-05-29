@@ -16,31 +16,38 @@ def save_job(data, url):
     return new_job
 
 def db_actions(jobs_list):
-    if testAndActConnection("database/test.db", jobs_list) == True:
+    if testAndActConnection("database/jobs.db", jobs_list) == True:
         print("Closing successful. Done.")
     else:
         return
 
 def testAndActConnection(db_name, jobs_list):
     try:
-        print("Connection to database was succesful. Initiating the data insertion...")
+        print("Connection to database was successful. Initiating the data insertion...")
         sqlConnection = db.connect(db_name)
         cursor = sqlConnection.cursor()
         cursor.execute("CREATE TABLE IF NOT EXISTS jobs (id INTEGER PRIMARY KEY, job_id INTEGER, title TEXT, link TEXT)")
 
+        cursor.execute("SELECT job_id FROM jobs")
+        rows = cursor.fetchall()  # fetches all the job_id rows to be checked for existing ones
+        compareIds = [row[0] for row in rows]
+
         for job in jobs_list:
+            if job.job_id in compareIds:
+                continue
             query = "INSERT INTO jobs (job_id, title, link) VALUES (?, ?, ?)"
             values = (job.id, job.title, job.url)
             cursor.execute(query, values)
-        sqlConnection.commit() # saves the data
+            compareIds.append(job.job_id)
+        sqlConnection.commit()  # saves the data
 
-    except db.Error as error :
+    except db.Error as error:
         print("Error while connecting to SQLite database", error)
         return False
 
     finally:
         if sqlConnection:
-            sqlConnection.close() # closes the connection to the database
+            sqlConnection.close()  # closes the connection to the database
             return True
         else:
             return False
