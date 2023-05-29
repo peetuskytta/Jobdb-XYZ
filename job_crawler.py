@@ -8,10 +8,11 @@ import requests
 from utility_functions import *
 from bs4 import BeautifulSoup
 from classes import Job
+from url_gen import url_gen
 
 index = 2
 base_url = 'https://duunitori.fi'
-seach_url = 'https://duunitori.fi/tyopaikat?filter_work_type=full_time&haku=system%20specialist%3Bdeveloper%3BLinux-kehitt%C3%A4j%C3%A4%3Bohjelmoija'
+seach_url = url_gen("titles")
 page_found = True
 page_number = 1
 job_list = [] # creates an empty list
