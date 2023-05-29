@@ -1,4 +1,5 @@
 /venv
+/myenv
 test
 *.txt
 notes

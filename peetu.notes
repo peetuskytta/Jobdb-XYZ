@@ -51,3 +51,9 @@ accepting emails from any sender while still maintaining a level of security for
 
 
 class_='grid grid--middle job-box job-box--lg'
+
+
+NOTES about SQLite
+- We should add the search results in an SQLite database (opportunity to learn SQL)
+- This enables more control of search results and rankings of the results
+- user id etc...
