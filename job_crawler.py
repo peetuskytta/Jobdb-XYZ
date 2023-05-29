@@ -28,11 +28,11 @@ while page_found:
     if response.status_code == 200:
         html = response.content
         soup = BeautifulSoup(html, 'html.parser')
-        job_grid = soup.find_all('div', class_='grid grid--middle job-box job-box--lg')
+        job_grid = soup.find_all('div')
         for div in job_grid:
-            #print(div)
-            new_job = save_job(div, base_url)
-            job_list.append(new_job)
+            print(div.find_all('div'))
+            #new_job = save_job(div, base_url)
+            #job_list.append(new_job)
     else:
         if response.status_code == 404:
             #print(f"Page {page_number}: not found")
