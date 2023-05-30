@@ -12,7 +12,7 @@ from url_gen import url_gen
 
 index = 2
 base_url = 'https://duunitori.fi'
-seach_url = url_gen("titles")
+seach_url = url_gen("files/titles")
 page_found = True
 page_number = 1
 job_list = [] # creates an empty list
@@ -41,7 +41,7 @@ while page_found:
     response = None
     page_number += 1
 
-#Connect to a database usig SQLite and add the list of jobs to database table
+# Connect to a database usig SQLite and add the list of jobs to database table
 db_actions(job_list)
 #for Job in job_list:
 #	print(Job)

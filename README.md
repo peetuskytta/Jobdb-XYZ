@@ -1,16 +1,26 @@
 # Crawler
 Python job posting webcrawler to list interesting job postings.
+Authors: Asukava & Pskytta, Hive Helsinki Alumni
 
-To create the virtual environment use this: `python3 -m venv myenv`
+In case you wish to clone the project we recommend Linux as the operating system.
 
-To activate the virtual environment use this `source myvenv/bin/activate`
+To create the virtual environment use `python3 -m venv myenv`
 
-To deactivate the virtual use this `deactivate`
+To activate the virtual environment use `source myvenv/bin/activate`
+
+To deactivate the virtual environment use `deactivate`
+
+To install the required libraries use `sudo pip install bs4 requests`
+
+To install other utilities use `sudo apt install sqlite3 sqlbrowser`
+- We chose sqlite3 as it is easy to use and we gain SQL and database experience.
+- Browsing the database is useful so we decided to use `sqlbrowser` for graphic representation of the database. We are also using terminal commands with the `sqlite` to get familiar with querys.
 
 ## Init script
 
-Let's have a script that would be run to install the above venv and libraries required by the project?
+Let's have a script that would be run to download required libraries and maybe even create the virtual environment.
 
+TO BE DONE later
 
 ## To-Do
 To-Do:
@@ -19,13 +29,15 @@ To-Do:
 	3. Use further parsing and choose what interests you.
 	4. next steps?
 	5. Ales: URl-generator. Function that generates valid url from a file that includes wanted job titles
+	6. Job titles that have been sent to you would not be sent again, so some kind of control for that?
+	7.
 
 
 Notes:
 --	https://realpython.com/beautiful-soup-web-scraper-python/
 --	study webcrawler detectors
 --	consider possibility of being able to communicate with the program via email to change and update desired keywords
--- Let's use also "rule out"-rules to filter out these kind of surprises: https://duunitori.fi/tyopaikat/tyo/lavistajalevytyostokoneen-ohjelmoija-scsar-16832014 (löytyi koska sana ohjelmoija)
+--
 
 Peetu Notes:
 -- Peetu = best
