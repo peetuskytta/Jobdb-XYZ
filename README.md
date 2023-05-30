@@ -12,7 +12,8 @@ To-Do:
 	2. Send the revelant info to a file.
 	3. Use further parsing and choose what interests you.
 	4. next steps?
-	5. Ales: URl-generator. Function that generates valid url from a file that includes wanted job titles
+	7. Ales: Build a working email service. Also install python and all needed libraries and keep them up to date. Needs to keep admins (ale and peetu) up to date in case of errors (404)
+	8. Study web _crawler detectors_!
 
 
 Notes:
@@ -32,3 +33,7 @@ BEST PRACTISES:
 --	always `git pull` first on main branch before making any changes
 --	you can check new Notes by using `git checkout <branch>` without having to merge
 --	need to change last commit message? use `git commit --amend`
+
+Things done:
+	5. Ales: URl-generator. Function that generates valid url from a file that includes wanted job titles
+	6. Ales: Research and setup free server.
