@@ -1,0 +1,62 @@
+Allowing anyone to send emails to your server without any filtering or
+validation can pose security risks. Here are some potential concerns:
+
+1. Spam and abuse: Allowing unrestricted access may attract spam emails
+or malicious content. This can overload your server, impact performance,
+and create difficulties in distinguishing legitimate requestsfrom unwanted ones.
+
+2. Injection attacks: Malicious actors could attempt to exploit vulnerabilities
+in your email processing script by injecting harmful code or commands within the
+email content. This could lead to unauthorized access, data breaches, or system
+compromise.
+
+3. Denial-of-Service (DoS) attacks: Attackers may flood your server with
+a large volume of emails, exhausting server resources and causing it to become
+unresponsive or crash. This can disrupt normal email processing and affect the
+availability of your system.
+
+4. Malware and viruses: Email attachments or links within incoming emails
+may contain malware or viruses. Executing such attachments or accessing
+malicious links could lead to malware infections on your server or compromise
+the security of your system.
+
+To mitigate these risks, you should consider implementing the following measures:
+
+a. Email filtering: Set up filters and rules on your email server to block or
+flag suspicious or unwanted emails. Implement techniques like spam filtering,
+sender verification, and content analysis to reduce the likelihood of
+receiving malicious or spam emails.
+
+b. Input validation and sanitization: Ensure that your email processing
+script validates and sanitizes the incoming email content to prevent
+injection attacks. Use libraries or frameworks that provide secure methods
+for parsing and handling email data.
+
+c. Rate limiting: Implement rate-limiting mechanisms to restrict the number
+of emails that can be processed within a specific time frame. This can help
+mitigate the impact of DoS attacks or excessive email traffic.
+
+d. Security measures: Apply best practices for securing your server, including
+regular software updates, strong access controls, and secure configurations.
+Consider using encryption for email communication, both in transit and at rest.
+
+e. Testing and monitoring: Thoroughly test your email processing system to
+identify vulnerabilities and address them before deploying it in a production
+environment. Set up monitoring and logging mechanisms to detect any unusual or
+suspicious activities.
+
+By implementing these measures, you can reduce the risks associated with
+accepting emails from any sender while still maintaining a level of security for your system.
+
+
+
+class_='grid grid--middle job-box job-box--lg'
+
+
+NOTES about SQLite (https://www.youtube.com/watch?v=HQKwgk6XkIA)
+- We should add the search results in an SQLite database (opportunity to learn SQL)
+- This enables more control of search results and rankings of the results
+- user id etc...
+
+Idea: create X amount of databases based on the search parameters. If one similar already exists
+and is < 24h old we use that and not scrape again?
