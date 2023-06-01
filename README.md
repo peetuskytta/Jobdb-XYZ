@@ -19,18 +19,18 @@ To install other utilities use `sudo apt install sqlite3 sqlbrowser`
 ## Init script
 
 Let's have a script that would be run to download required libraries and maybe even create the virtual environment.
-
-TO BE DONE later
+-- TO BE DONE later --
 
 ## To-Do
 To-Do:
-	1. get all the duunitori pages with keywords: software developer, system specialist, ohjelmoija, etc. to be parsed and printed out to stdout.
-	2. Send the revelant info to a file.
-	3. Use further parsing and choose what interests you.
-	4. next steps?
-	5. Ales: URl-generator. Function that generates valid url from a file that includes wanted job titles
-	6. Job titles that have been sent to you would not be sent again, so some kind of control for that?
-	7.
+	- Use further parsing for the job_link to cherry-pick based on user input.
+	- Job titles that have been sent to you would not be sent again, so some kind of control for that?
+	- Further develop data relationships between user and jobs table (foreign key consept)
+
+## DONE
+	- get all the duunitori pages with keywords: software developer, system specialist, ohjelmoija, etc. to be parsed and printed out to stdout.
+	- Store relevant info to a database.
+	- Ales: URl-generator. Function that generates valid url from a file that includes wanted job titles
 
 
 Notes:
@@ -42,6 +42,7 @@ Notes:
 Peetu Notes:
 -- Peetu = best
 -- added folder called database where all required databases would be created.
+-- Database created
 
 Ale Notes:
 -- Ale = Bestest

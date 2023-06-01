@@ -26,6 +26,9 @@ def testAndActConnection(db_name, jobs_list):
         print("Connection to database was successful. Initiating the data insertion...")
         sqlConnection = db.connect(db_name)
         cursor = sqlConnection.cursor()
+        # The table users will store the email and user_id. Later we can relate user_id with multiple
+        # job_ids to identify what the user has received already
+        cursor.execute("CREATE TABLE IF NOT EXISTS users (user_id INT PRIMARY KEY, email VARCHAR(255))")
         cursor.execute("CREATE TABLE IF NOT EXISTS jobs (job_id INT PRIMARY KEY, title TEXT, link TEXT)")
 
         cursor.execute("SELECT job_id FROM jobs")
