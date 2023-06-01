@@ -26,19 +26,19 @@ def testAndActConnection(db_name, jobs_list):
         print("Connection to database was successful. Initiating the data insertion...")
         sqlConnection = db.connect(db_name)
         cursor = sqlConnection.cursor()
-        cursor.execute("CREATE TABLE IF NOT EXISTS jobs (id INTEGER PRIMARY KEY, job_id INTEGER, title TEXT, link TEXT)")
+        cursor.execute("CREATE TABLE IF NOT EXISTS jobs (job_id INT PRIMARY KEY, title TEXT, link TEXT)")
 
         cursor.execute("SELECT job_id FROM jobs")
         rows = cursor.fetchall()  # fetches all the job_id rows to be checked for existing ones
         compareIds = [row[0] for row in rows]
 
         for job in jobs_list:
-            if job.job_id in compareIds:
+            if job.id in compareIds:
                 continue
             query = "INSERT INTO jobs (job_id, title, link) VALUES (?, ?, ?)"
             values = (job.id, job.title, job.url)
             cursor.execute(query, values)
-            compareIds.append(job.job_id)
+            compareIds.append(job.id)
         sqlConnection.commit()  # saves the data
 
     except db.Error as error:
