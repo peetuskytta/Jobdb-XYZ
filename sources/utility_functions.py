@@ -7,13 +7,6 @@ from classes import Job
 from bs4 import BeautifulSoup
 
 def save_job(data, url):
-    # OLD WAY
-    	#job_title = data.find('h3', class_='job-box__title').text.strip()
-    	#a_ref = data.find('a')
-    	#job_id = a_ref.get('data-id')
-    	#job_link = url + a_ref.get('href')
-    #
-    # NEW WAY
     job_title = data.h3.text
     job_id = data.a['data-id']
     job_link = url + data.a['href']
