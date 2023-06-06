@@ -18,7 +18,7 @@ def db_actions(jobs_list):
         print("Closing successful. Done.")
     else:
         return
-
+ 
 def testAndActConnection(db_name, jobs_list):
     try:
         print("Connection to database was successful. Initiating the data insertion...")
