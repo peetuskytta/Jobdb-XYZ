@@ -43,6 +43,8 @@ Peetu Notes:
 -- Peetu = best
 -- added folder called database where all required databases would be created.
 -- Database created
+-- collect also the destination "apply"-link and check if it is 404 or not.
+-- collect info about level (junior, medior, senior) and insert it to the DB
 
 Ale Notes:
 -- Ale = Bestest

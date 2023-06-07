@@ -1,0 +1,14 @@
+Here are some useful SQLite3 database commands to use it from terminal.
+
+Examples:
+	sqlite3 <database>
+
+	SELECT title, link FROM jobs WHERE id='11830912';
+
+	SELECT title, link FROM jobs ORDER BY title ASC;
+
+	.help
+
+	.exit
+
+	

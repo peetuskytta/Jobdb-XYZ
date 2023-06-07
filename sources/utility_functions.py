@@ -18,7 +18,7 @@ def db_actions(jobs_list):
         print("Closing successful. Done.")
     else:
         return
- 
+
 def testAndActConnection(db_name, jobs_list):
     try:
         print("Connection to database was successful. Initiating the data insertion...")
@@ -27,10 +27,10 @@ def testAndActConnection(db_name, jobs_list):
         # The table users will store the email and user_id. Later we can relate user_id with multiple
         # job_ids to identify what the user has received already
         #cursor.execute("CREATE TABLE IF NOT EXISTS users (user_id INT PRIMARY KEY, email VARCHAR(255))")
-        cursor.execute("CREATE TABLE IF NOT EXISTS jobs (id INT PRIMARY KEY, title TEXT, link TEXT)")
+        cursor.execute("CREATE TABLE IF NOT EXISTS jobs (nro INT PRIMARY KEY, id INT PRIMARY KEY, title TEXT, link TEXT)")
 
         cursor.execute("SELECT id FROM jobs")
-        rows = cursor.fetchall()  # fetches all the job_id rows to be checked for existing ones
+        rows = cursor.fetchall()  # fetches all the id rows to be checked for existing ones
         compareIds = [row[0] for row in rows]
 
         for job in jobs_list:
