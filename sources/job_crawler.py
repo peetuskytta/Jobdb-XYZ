@@ -38,6 +38,7 @@ while page_found:
         if response.status_code == 404:
             #print(f"Page {page_number}: not found")
             page_found = False
+    print(page_number)
     response = None
     page_number += 1
 
