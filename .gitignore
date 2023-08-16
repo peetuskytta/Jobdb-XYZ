@@ -5,5 +5,5 @@ test
 notes
 /scraperenv
 __pycache__/
-/.vscode
+/.vscode/
 database
