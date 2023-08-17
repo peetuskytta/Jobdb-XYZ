@@ -15,7 +15,7 @@ def save_job(data, url):
 
 def db_actions(jobs_list):
     if testAndActConnection("database/jobs.db", jobs_list) == True:
-        print("Closing successful. Done.")
+        print("Closing successful. Done.") #later collect this to a log and redirect err messages to errlog in the Oracle Linux
     else:
         return
 

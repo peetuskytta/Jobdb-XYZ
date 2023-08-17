@@ -1,19 +1,25 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
+    return render_template('index.html')
+
+@app.route('/process_keywords', methods=['POST'])
+
+def process_keywords():
     if request.method == 'POST':
         email = request.form.get('email')
         keywords = request.form.get('keywords').split(',')
 
-        # add your keyword processing logic here
+        # add your keyword processing logic here, check in the SQLite database
         print("Email:", email)
         print("Keywords:", keywords)
-        # You can send an email with the processed result here
+        # javascript? to handle the things on frontend when showing the results.
+        #return jsonify(keywords)
 
-    return render_template('index.html')
+    return "Keywords processed successfully!"
 
 if __name__ == '__main__':
     app.run(debug=True)
