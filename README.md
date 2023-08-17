@@ -16,6 +16,13 @@ keywords and returns title and a link to the job posting.
 
 ## Deployment
 - Deployed on a Oracle Cloud running Oracle Linux Server 8.8. (Full deployment under construction)
+Steps we took with the server:
+1. create usernames and home folders for both of us.
+2. connect to the server via SSH.
+3. write scripts to update the server on midnight.
+4. create a group for both users to facilitate permission handling.
+5. install required services with `yum`
+6. 
 
 ## Useful Information
 
