@@ -13,13 +13,13 @@ def save_job(data, url):
     new_job = Job(job_title, job_id, job_link)
     return new_job
 
-def db_actions(jobs_list):
+def db_actions(jobs_list: list):
     if testAndActConnection("database/jobs.db", jobs_list) == True:
-        print("Closing successful. Done.")
+        print("Closing successful. Done.") #later collect this to a log and redirect err messages to errlog in the Oracle Linux
     else:
         return
 
-def testAndActConnection(db_name, jobs_list):
+def testAndActConnection(db_name: str, jobs_list: list):
     try:
         print("Connection to database was successful. Initiating the data insertion...")
         sqlConnection = db.connect(db_name)
