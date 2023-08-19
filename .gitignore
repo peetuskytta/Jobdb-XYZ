@@ -6,5 +6,5 @@ notes
 /scraperenv
 __pycache__/
 /.vscode/
-database
+/database
 files/peetu.notes

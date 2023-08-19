@@ -9,6 +9,7 @@ from utility_functions import *
 from bs4 import BeautifulSoup
 from classes import Job
 from url_gen import url_gen
+import sys
 
 index = 2
 base_url = 'https://duunitori.fi'
@@ -38,11 +39,14 @@ while page_found:
         if response.status_code == 404:
             #print(f"Page {page_number}: not found")
             page_found = False
-    print(page_number)
+    sys.stdout.flush()
+    sys.stdout.write("\rNumber of pages processed: %d" % page_number)
+    #print(page_number)
     response = None
     page_number += 1
 
 # Connect to a database usig SQLite and add the list of jobs to database table
+print("\nTotal pages processed: ", page_number)
 db_actions(job_list)
 #for Job in job_list:
 #	print(Job)

@@ -1,7 +1,10 @@
 # Crawler
 Authors: Asukava & Pskytta, Hive Helsinki Alumni
 ## What?
-A web crawler written in Python.
+A web crawler written in Python and using the following:
+- beautifulsoup (for HTML parsing)
+- SQLite (for database)
+- flask (web app framework)
 
 ## Why?
 Idea is to have a simple web app that we could use through browser to find 5 or more positions
@@ -22,7 +25,7 @@ Steps we took with the server:
 3. write scripts to update the server on midnight.
 4. create a group for both users to facilitate permission handling.
 5. install required services with `yum`
-6. 
+6.
 
 ## Useful Information
 
