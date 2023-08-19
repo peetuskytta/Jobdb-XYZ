@@ -1,10 +1,10 @@
-/venv
-/myenv
+venv/
+myenv/
 test
 *.txt
 notes
-/scraperenv
+scraperenv/
 __pycache__/
-/.vscode/
-/database
+.vscode/
+database/jobs.db
 files/peetu.notes
