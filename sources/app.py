@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, jsonify
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/process_keywords', methods=['POST'])
+@application.route('/process_keywords', methods=['POST'])
 
 def process_keywords():
     if request.method == 'POST':
@@ -22,7 +22,7 @@ def process_keywords():
     return "Keywords processed successfully!"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
