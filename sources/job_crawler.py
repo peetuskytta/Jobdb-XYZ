@@ -1,7 +1,7 @@
 ##
 #	Project name: Crawler
 #	Description: a crawler/scraper to search specific job titles from Duunitori.fi
-#	Authors: Asukava & Pskytta, Hive Helsinki Alumni
+#	Authors: Asukava & Pskytta, Hive Helsinki students
 ##
 
 import requests
@@ -41,7 +41,6 @@ while page_found:
             page_found = False
     sys.stdout.flush()
     sys.stdout.write("\rNumber of pages processed: %d" % page_number)
-    #print(page_number)
     response = None
     page_number += 1
 
