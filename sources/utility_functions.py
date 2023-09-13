@@ -5,17 +5,21 @@
 import sqlite3 as db
 from classes import Job
 from bs4 import BeautifulSoup
+import requests
 
 def save_job(data, url):
     job_title = data.h3.text
     job_id = data.a['data-id']
     job_link = url + data.a['href']
-    new_job = Job(job_title, job_id, job_link)
+    job_description = None
+    job_category = ""
+    new_job = Job(job_title, job_id, job_link, job_description, job_category)
     return new_job
 
-def db_actions(jobs_list: list):
+def database_inserts(jobs_list: list):
     if testAndActConnection("database/jobs.db", jobs_list) == True:
-        print("Closing successful. Done.") #later collect this to a log and redirect err messages to errlog in the Oracle Linux
+        #later collect this to a log and redirect err messages to errlog in the Oracle Linux
+        pass
     else:
         return
 
@@ -27,7 +31,7 @@ def testAndActConnection(db_name: str, jobs_list: list):
         # The table users will store the email and user_id. Later we can relate user_id with multiple
         # job_ids to identify what the user has received already
         #cursor.execute("CREATE TABLE IF NOT EXISTS users (user_id INT PRIMARY KEY, email VARCHAR(255))")
-        cursor.execute("CREATE TABLE IF NOT EXISTS jobs (nro INT PRIMARY KEY, id INT, title TEXT, link TEXT)")
+        cursor.execute("CREATE TABLE IF NOT EXISTS jobs (nro INT PRIMARY KEY, id INT, title TEXT, link TEXT, description TEXT, category TEXT)")
 
         cursor.execute("SELECT id FROM jobs")
         rows = cursor.fetchall()  # fetches all the id rows to be checked for existing ones
@@ -36,8 +40,8 @@ def testAndActConnection(db_name: str, jobs_list: list):
         for job in jobs_list:
             if job.id in compareIds:
                 continue
-            query = "INSERT INTO jobs (id, title, link) VALUES (?, ?, ?)"
-            values = (job.id, job.title, job.url)
+            query = "INSERT INTO jobs (id, title, link, description, category) VALUES (?, ?, ?, ?, ?)"
+            values = (job.id, job.title, job.url, job.description, job.category)
             cursor.execute(query, values)
             compareIds.append(job.id)
         sqlConnection.commit()  # saves the data
@@ -48,7 +52,30 @@ def testAndActConnection(db_name: str, jobs_list: list):
 
     finally:
         if sqlConnection:
-            sqlConnection.close()  # closes the connection to the database
+            # close the connection to the database
+            sqlConnection.close()
+            print("Closing successful.")
             return True
         else:
             return False
+
+def categorize_job(filename: str, job: Job):
+    response = requests.get(job.url)
+    if response.status_code == 200:
+        with open(filename, "r") as file:
+            terms = file.read().split()
+        html = response.content
+        soup = BeautifulSoup(html, 'html.parser')
+        description = soup.find('div', class_='gtm-apply-clicks description description--jobentry')
+        # The following check eliminates the possible Demo page which would cause an error
+        # as description would return None.
+        if description:
+            result = []
+            div_text = description.get_text()
+            job.description = div_text
+            for word in terms:
+                if word.lower() in div_text.lower():
+                    if word not in result:
+                        result.append(word)
+            for item in result:
+                job.category += item + " "
