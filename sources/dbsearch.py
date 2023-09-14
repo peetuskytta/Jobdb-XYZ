@@ -14,7 +14,7 @@ def open_database(db_name: str):
 
 def search_database(sql_connection, words: list):
     cursor = sql_connection.cursor()
-    cursor.execute("SELECT title, link FROM jobs")
+    cursor.execute("SELECT title, category, link FROM jobs")
     # Fetch all the titles
     titles = cursor.fetchall()
     # Close the cursor and return the results

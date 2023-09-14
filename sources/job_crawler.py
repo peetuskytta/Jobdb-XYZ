@@ -34,10 +34,10 @@ while page_found:
         soup = BeautifulSoup(html, 'html.parser')
         job_grid = soup.find_all('div', class_='grid grid--middle job-box job-box--lg')
         for div in job_grid:
-            new_job = save_job(div, base_url)
-            categorize_job("files/languages", new_job)
-            if new_job.category != "empty" and new_job.description != None:
-                job_list.append(new_job)
+            job = save_job(div, base_url)
+            categorize_job("files/languages", job)
+            if job.category != "empty" and job.description != None:
+                job_list.append(job)
     else:
         if response.status_code == 503:
             raise ConnectionError("Under maintenance")
