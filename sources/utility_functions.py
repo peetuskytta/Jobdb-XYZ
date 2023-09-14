@@ -13,6 +13,11 @@ def save_job(data, url):
     job_link = url + data.a['href']
     job_description = None
     job_category = ""
+    date = data.find('span', class_='job-box__job-posted').text
+    if date[-1] == "." or date[-1] == "3":
+        print(date)
+    else:
+        print(f" Wrong: {date}")
     new_job = Job(job_title, job_id, job_link, job_description, job_category)
     return new_job
 

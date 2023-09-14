@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 from classes import Job
 from url_gen import url_gen
 import sys
+import re
 
 index = 2
 base_url = 'https://duunitori.fi'
