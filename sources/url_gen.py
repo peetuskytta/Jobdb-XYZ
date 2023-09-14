@@ -1,7 +1,4 @@
-import requests
-from bs4 import BeautifulSoup
-
-#Deletes consecutive "sym"-characters, except for one.
+#   Deletes consecutive "sym"-characters, except for one.
 def del_doubles(sym, string):
     ret = ""
     prev_char = ""
@@ -11,10 +8,12 @@ def del_doubles(sym, string):
                 prev_char = char
     return ret
 
-#   Function reads list of titles from file, turns them in to a string, deletes unwanted newlines, converts certain symbols to URL-language and then joins it with a proper URL-head to create a working URL.
-def url_gen(path):
+#   Function reads list of titles from file, turns them in to a string,
+#   deletes unwanted newlines, converts certain symbols to URL-language
+#   and then joins it with a proper URL-head to create a working URL.
+def url_gen(filename):
     base = 'https://duunitori.fi/tyopaikat?filter_work_type=full_time&haku='
-    file = open(path, "r")
+    file = open(filename, "r")
     string = "".join(file)
     string = del_doubles("\n", string)
     if  string.startswith("\n"):

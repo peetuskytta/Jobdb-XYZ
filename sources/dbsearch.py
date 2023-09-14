@@ -10,13 +10,11 @@ def open_database(db_name: str):
     finally:
         if sqlConnection:
             return sqlConnection
-        else:
-            return None
+        return None
 
 def search_database(sql_connection, words: list):
     cursor = sql_connection.cursor()
-    query = "SELECT title, link FROM jobs"
-    cursor.execute(query)
+    cursor.execute("SELECT title, link FROM jobs")
     # Fetch all the titles
     titles = cursor.fetchall()
     # Close the cursor and return the results

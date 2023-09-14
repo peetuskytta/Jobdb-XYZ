@@ -14,13 +14,10 @@ def process_keywords():
         keywords = request.form.get('keywords').split(' ')
 
         db_name = open_database("database/jobs.db")
-        results = search_database(db_name, keywords)
-
-        # add your keyword processing logic here, check in the SQLite database
-        #print("Keywords:", keywords)
-        return jsonify(results)
-
-    #return "Keywords processed successfully!"
+        if db_name != None:
+            results = search_database(db_name, keywords)
+            # create a dict with the results?
+            return jsonify(results)
 
 if __name__ == '__main__':
     app.run(debug=True)

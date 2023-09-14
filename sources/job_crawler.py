@@ -18,11 +18,13 @@ page_found = True
 page_number = 1
 job_list = []
 
-target = "Duunitori suosittelee"
+#target = "Duunitori suosittelee"
 
 while page_found:
     if page_number == 1:
         response = requests.get(seach_url)
+        if response.status_code == 503:
+            raise ConnectionError("Under maintenance")
     else:
         url = seach_url + "&sivu=" + str(index)
         response = requests.get(url)
@@ -37,6 +39,8 @@ while page_found:
             if new_job.category != "empty" and new_job.description != None:
                 job_list.append(new_job)
     else:
+        if response.status_code == 503:
+            raise ConnectionError("Under maintenance")
         if response.status_code == 404:
             page_found = False
     sys.stdout.flush()
