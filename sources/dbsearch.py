@@ -17,6 +17,7 @@ def search_database(sql_connection, words: list):
     cursor.execute("SELECT title, category, link FROM jobs")
     # Fetch all the titles
     titles = cursor.fetchall()
+    # check for the keywords and return title and link
     # Close the cursor and return the results
     cursor.close()
     return titles

@@ -19,7 +19,31 @@
             // Function to display the returned data
             function displayKeywords(keywords) {
                 const resultContainer = document.getElementById('result-container');
-                resultContainer.innerHTML = `<p>Processed Keywords: ${keywords.join(', ')}</p>`;
+
+                if (keywords.length === 0) {
+                    resultContainer.innerHTML = `<p>No keywords found.</p>`;
+                    return;
+                }
+
+                // Get the last tuple in the array
+                const lastTuple = keywords[keywords.length - 1];
+                const [text, url] = lastTuple;
+
+                // Create an array of strings for all tuples except the last one
+                const keywordStrings = keywords.slice(0, -1).map(tuple => tuple.join(', '));
+
+                // Join the array with line breaks
+                const formattedKeywords = keywordStrings.join('<br>');
+
+                // Create the last tuple as a link
+                const linkElement = document.createElement('a');
+                linkElement.href = url;
+                linkElement.target = '_blank';
+                linkElement.textContent = text;
+
+                // Append the link to the result container
+                resultContainer.innerHTML = '<p>Processed Keywords:<br>' + formattedKeywords + '</p>';
+                resultContainer.appendChild(linkElement);
             }
 
             // Example of how to fetch and display data after form submission (using fetch)

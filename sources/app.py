@@ -16,6 +16,8 @@ def process_keywords():
         db_name = open_database("database/jobs.db")
         if db_name != None:
             results = search_database(db_name, keywords)
+            #print(results)
+            #exit(1)
             # create a dict with the results?
             return jsonify(results)
 
