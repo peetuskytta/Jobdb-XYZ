@@ -4,9 +4,12 @@
     <title>42 for life</title>
 </head>
 <body>
-    <h1>Search the Database</h1>
+    <h2>Search the IT Job Database:<br></h2>
+    <h5>
+        Example: "Java Linux Cloud" use space as a separator.<br>
+    </h5>
     <form method="POST" action="/process_keywords">
-        <label for="keywords">Keywords (up to 5, space-separated):</label>
+        <label for="keywords">Your keywords:</label>
         <input type="text" id="keywords" name="keywords" required><br><br>
         <input type="submit" value="Submit">
     </form>
@@ -25,25 +28,17 @@
                     return;
                 }
 
-                // Get the last tuple in the array
-                const lastTuple = keywords[keywords.length - 1];
-                const [text, url] = lastTuple;
+                // Create an array of formatted strings for each dictionary
+                const formattedKeywords = keywords.map((dict) => {
+                    const [name, link] = Object.entries(dict)[0]; // Assuming each dictionary has only one key-value pair
+                    return `${name}: <a href="${link}" target="_blank">click here</a>`;
+                });
 
-                // Create an array of strings for all tuples except the last one
-                const keywordStrings = keywords.slice(0, -1).map(tuple => tuple.join(', '));
+                // Join the formatted strings with line breaks
+                const resultHTML = `<p>Job Listings that match one of the keywords:<br>${formattedKeywords.join('<br>')}</p>`;
 
-                // Join the array with line breaks
-                const formattedKeywords = keywordStrings.join('<br>');
-
-                // Create the last tuple as a link
-                const linkElement = document.createElement('a');
-                linkElement.href = url;
-                linkElement.target = '_blank';
-                linkElement.textContent = text;
-
-                // Append the link to the result container
-                resultContainer.innerHTML = '<p>Processed Keywords:<br>' + formattedKeywords + '</p>';
-                resultContainer.appendChild(linkElement);
+                // Display the formatted data in the result container
+                resultContainer.innerHTML = resultHTML;
             }
 
             // Example of how to fetch and display data after form submission (using fetch)
