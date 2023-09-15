@@ -86,6 +86,6 @@ def categorize_job(filename: str, job: Job):
             for word in terms:
                 if word.lower() in div_text.lower():
                     if word not in result:
-                        result.append(word)
+                        result.append(word.lower())
             for item in result:
                 job.category += item + " "
