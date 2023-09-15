@@ -11,9 +11,9 @@ def index():
 
 def process_keywords():
     if request.method == 'POST':
-        keywords = request.form.get('keywords').split(' ')
-        for word in keywords:
-            word = word.lower()
+        keywords = request.form.get('keywords')
+        keywords = keywords.split(' ')
+        keywords = list(map(str.lower, keywords))
         db_name = open_database("database/jobs.db")
         if db_name != None:
             results = search_database(db_name, keywords)
