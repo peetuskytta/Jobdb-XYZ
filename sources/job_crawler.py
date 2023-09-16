@@ -1,7 +1,7 @@
 ##
-#	Project name: Crawler
-#	Description: a crawler/scraper to search specific job titles from Duunitori.fi
-#	Authors: Asukava & Pskytta, Hive Helsinki students
+#       Project name: Crawler
+#       Description: a crawler/scraper to search specific job titles from Duunitori.fi
+#       Authors: Asukava & Pskytta, Hive Helsinki students
 ##
 
 import requests
