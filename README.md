@@ -2,7 +2,7 @@
 Authors: Asukava & Pskytta, Hive Helsinki students
 
 ### What?
-A Python web crawler / web app to search the database for IT job postings
+A Python web crawler / web app to search the database for IT job postings.
 
 ### What does it do?
 - crawls through a job listing website in search for job postings for
@@ -12,15 +12,16 @@ software developer roles.
 
 ### Deployment
 - Deployed on a Oracle Cloud running Oracle Linux Server 8.8.
+
 Steps we took with the server:
 1. setup users and home folders for both of us.
 2. connect to the server via SSH.
 3. write scripts to update the server.
 4. create a group for both users to facilitate permission handling.
-6. setup proper security lists in Oracle to enable internet traffic
+6. setup proper security lists in Oracle to enable internet traffic.
 8. setup Apache, pip3 and WSGI
 9. setup proper firewall rules
-10. ensure automatic deployment after boot
+10. set crontab for the crawler to update the database once a day.
 
 ## What we used
 - Python
@@ -33,11 +34,10 @@ Steps we took with the server:
     - firewall
     - managing system users and permissions
 - SSH
+- Bash
 - Git
-
 
 ## Useful Information
 
 In case you wish to clone the project we recommend Linux as the operating system.
-
 
