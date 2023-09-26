@@ -1,5 +1,5 @@
 ##
-#	Contains useful functions for the project.
+#       Contains useful functions for the project.
 ##
 
 import sqlite3 as db
@@ -22,19 +22,20 @@ def save_job(data, url):
     return new_job
 
 def database_inserts(jobs_list: list):
-    if testAndActConnection("database/jobs.db", jobs_list) == True:
+    if testAndActConnection("/opt/database/jobs.db", jobs_list) == True:
         #later collect this to a log and redirect err messages to errlog in the Oracle Linux
         pass
     else:
         return
 
 def testAndActConnection(db_name: str, jobs_list: list):
+    sqlConnection = None
     try:
         print("Connection to database was successful. Initiating the data insertion...")
         sqlConnection = db.connect(db_name)
         cursor = sqlConnection.cursor()
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS jobs (
+                CREATE TABLE IF NOT EXISTS jobs (
                 nro INTEGER PRIMARY KEY,
                 id INTEGER,
                 title TEXT,
@@ -60,7 +61,7 @@ def testAndActConnection(db_name: str, jobs_list: list):
         sqlConnection.commit()
 
     except db.Error as error:
-        print("Error while connecting to SQLite database", error)
+        print("Error while connecting to SQLite database: ", error)
         return False
 
     finally:

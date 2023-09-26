@@ -1,11 +1,10 @@
-
 import sqlite3 as db
 
 def open_database(db_name: str):
     try:
         sqlConnection = db.connect(db_name)
     except db.Error as error:
-        print("Error while connecting to SQLite database", error)
+        print("Error while connecting to SQLite database: ", error)
         return None
     finally:
         if sqlConnection:
@@ -15,7 +14,7 @@ def open_database(db_name: str):
 def search_database(sql_connection, words: list):
     cursor = sql_connection.cursor()
     cursor.execute("SELECT title, category, link FROM jobs")
-    # Fetch all the titles
+    # Fetch all the titles, category and link
     titles = cursor.fetchall()
     jobs = []
     for item in titles:
@@ -27,4 +26,3 @@ def search_database(sql_connection, words: list):
     # Close the cursor and return the results
     cursor.close()
     return jobs
-

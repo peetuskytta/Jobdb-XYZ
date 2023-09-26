@@ -14,7 +14,7 @@ def process_keywords():
         keywords = request.form.get('keywords')
         keywords = keywords.split(' ')
         keywords = list(map(str.lower, keywords))
-        db_name = open_database("database/jobs.db")
+        db_name = open_database("/opt/database/jobs.db")
         if db_name != None:
             results = search_database(db_name, keywords)
             # create a dict with the results?
