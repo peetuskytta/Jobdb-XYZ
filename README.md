@@ -47,3 +47,6 @@ In case you wish to clone the project we recommend Linux as the operating system
 - simplify the code for easier expansion
 - expand crawling to other websites (requires the item above)
 
+### Done
+
+- added database request logging to the app which stores timestamp and IP address to the server side log
