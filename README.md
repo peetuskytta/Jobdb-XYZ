@@ -44,8 +44,11 @@ In case you wish to clone the project we recommend Linux as the operating system
 ## To-Do
 
 - automation for cleaning the database of old job postings.
-- simplify the code for easier expansion
-- expand crawling to other websites (requires the item above)
+- simplify the code for easier expansion.
+- expand crawling to other websites (requires the item above).
+- a way to filter intern, junior, senior positions
+    - requires new SQL database rows
+- start using https instead of http
 
 ### Done
 
