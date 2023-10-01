@@ -55,7 +55,7 @@ def testAndActConnection(db_name: str, jobs_list: list):
                 continue
             else:
                 query = "INSERT INTO jobs (id, title, link, description, category, level) VALUES (?, ?, ?, ?, ?, ?)"
-                values = (job.id, job.title, job.url, job.description, job.category)
+                values = (job.id, job.title, job.url, job.description, job.category, job.level)
                 cursor.execute(query, values)
                 compareIds.append(job.id)
                 sqlConnection.commit()
