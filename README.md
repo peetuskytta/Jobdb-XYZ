@@ -55,4 +55,5 @@ In case you wish to clone the project we recommend Linux as the operating system
 - design simple and more modern frontend
 ### Done
 
-- added database request logging to the app which stores timestamp and IP address to the server side log
+- Added database request logging to the app which stores timestamp and IP address to the server side log
+- Database backup script added and set on root crontab to run once a day
