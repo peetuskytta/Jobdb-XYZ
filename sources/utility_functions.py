@@ -18,7 +18,8 @@ def save_job(data, url):
     job_link = url + data.a['href']
     job_description = None
     job_category = ""
-    new_job = Job(job_title, job_id, job_link, job_description, job_category)
+    job_level = ""
+    new_job = Job(job_title, job_id, job_link, job_description, job_category, job_level)
     return new_job
 
 def database_inserts(jobs_list: list):
@@ -41,7 +42,8 @@ def testAndActConnection(db_name: str, jobs_list: list):
                 title TEXT,
                 link TEXT,
                 description TEXT,
-                category TEXT
+                category TEXT,
+                level TEXT
             )
         """)
         cursor.execute("SELECT id FROM jobs")
@@ -52,7 +54,7 @@ def testAndActConnection(db_name: str, jobs_list: list):
             if job.id in compareIds:
                 continue
             else:
-                query = "INSERT INTO jobs (id, title, link, description, category) VALUES (?, ?, ?, ?, ?)"
+                query = "INSERT INTO jobs (id, title, link, description, category, level) VALUES (?, ?, ?, ?, ?, ?)"
                 values = (job.id, job.title, job.url, job.description, job.category)
                 cursor.execute(query, values)
                 compareIds.append(job.id)

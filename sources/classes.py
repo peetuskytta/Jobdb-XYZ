@@ -3,12 +3,13 @@
 ##
 
 class Job:
-    def __init__(self, title, id, url, description, category):
+    def __init__(self, title, id, url, description, category, level):
         self.id = id
         self.title = title
         self.url = url
         self.category = category
         self.description = description
+        self.level = level
 
         # This defines how the class job should be printed.
     def __str__(self):
