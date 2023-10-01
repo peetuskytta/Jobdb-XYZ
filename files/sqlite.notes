@@ -1,14 +1,37 @@
 Here are some useful SQLite3 database commands to use it from terminal.
 
+! ALWAYS END A STATEMENT WITH A SEMICOLON !
+! WHATEVER YOU ALTER IN TABLE, COPY THE DATABASE BEFORE !
+
 Examples:
 	sqlite3 <database>
+		- opens the database in the terminal
 
 	SELECT title, link FROM jobs WHERE id='11830912';
+		- selects title and link columns where the id matches
 
 	SELECT title, link FROM jobs ORDER BY title ASC;
+		- selects title and link columns and sort in ascending order
+		  based on the title
+
+	ALTER TABLE <table_name> ADD COLUMN <col_name> TEXT;
+		- alters the table to add a new column.
+
+	INSERT INTO my_table (name) VALUES ('John');
+		- inserts to name column the value 'John'
+
+	PRAGMA table_info(<name>);
+		- this will print information about the table and its
+		  columns (types, etc)
+	
+
+	IMPORTANT TIP:
+	Using tabs after a couple of letters will suggest SQL commands for you to
+	choose from
 
 	.help
-
+		- shows useful info
 	.exit
+		- saves, commits and exits
 
 	

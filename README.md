@@ -47,9 +47,12 @@ In case you wish to clone the project we recommend Linux as the operating system
 - simplify the code for easier expansion.
 - expand crawling to other websites (requires the item above).
 - a way to filter intern, junior, senior positions
-    - requires new SQL database rows
+    - requires new SQL database COLUMN
 - start using https instead of http
-
+- database backup and recovery
+    - add logic to the code to identify if the database is being altered/cleaned and use
+      the backup instead (during the 00:00 - 04:00 hours)
+- design simple and more modern frontend
 ### Done
 
 - added database request logging to the app which stores timestamp and IP address to the server side log
