@@ -1,85 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="light" lang="en">
+
 <head>
-    <title>42 for life</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            text-align: center;
-        }
-        /* for mobile */
-        @media screen and (max-width: 600px) {
-            label, input, input[type="submit"] {
-                width: 100%;
-            }
-        }
-        /* for PC */
-        @media screen and (min-width: 601px) {
-            form {
-                max-width: 400px;
-                margin: 0 auto;
-            }
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Job Database</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.min.css') }}">
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}"> -->
 </head>
+
 <body>
-    <h2>Search the IT Job Database:<br></h2>
-    <h5>
-        Example: "Java Linux Cloud" use space as a separator.<br>
-    </h5>
-    <form method="POST" action="/process_keywords">
-        <label for="keywords">Search:</label>
-        <input type="text" id="keywords" name="keywords" required><br><br>
-        <input type="submit" value="Submit">
-    </form>
+    <nav class="navbar navbar-expand-md fixed-top navbar-shrink py-3 navbar-light" id="mainNav">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>JobDatabase</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1" style="margin-left: 449px;">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html"><strong><span style="color: rgb(0, 0, 0);">About</span></strong></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="pt-5">
+        <div class="container pt-4 pt-xl-5">
+            <div class="row pt-5">
+                <div class="col-md-8 text-center text-md-start mx-auto">
+                    <div class="text-center">
+                        <h4 class="display-4 fw-bold mb-5" style="font-size: 30.3px;">Search database using coding languages, technologies or frameworks</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <form id="searchForm" method="POST" action="/process_keywords">
+            <div class="input-group"><input class="form-control" type="text" id="keywords" name="keywords" required placeholder="example: Python Kotlin C++">
+                <div class="input-group-append"><button class="btn btn-primary" id="searchButton" type="submit">submit</button></div>
+            </div>
+        </form>
 
-        <!-- Display container for the returned data -->
-        <div id="result-container"></div>
+            <!-- Display container for the returned data -->
+            <div id="result-container"></div>
 
-        <!-- JavaScript to handle the returned data -->
-        <script>
-            // Function to display the returned data
-            function displayKeywords(keywords) {
-                const resultContainer = document.getElementById('result-container');
-
-                if (keywords.length === 0) {
-                    resultContainer.innerHTML = `<p>No keywords found.</p>`;
-                    return;
+            <script>
+                // Function to display the returned data
+                function displayKeywords(keywords) {
+                    const resultContainer = document.getElementById('result-container');
+                    if (keywords.length === 0) {
+                        resultContainer.innerHTML = `<p>No keywords found.</p>`;
+                        return;
+                    }
+                    // Create an array of formatted strings for each keyword
+                    const formattedKeywords = keywords.map((keyword) => {
+                        return `<a href="${keyword.link}" target="_blank">${keyword.name}</a>`;
+                    });
+                    const resultHTML = `<p>Job Listings that match at least one of the keywords:<br><br>${formattedKeywords.join(', ')}</p>`;
+                    resultContainer.innerHTML = resultHTML;
                 }
 
-                // Create an array of formatted strings for each dictionary
-                const formattedKeywords = keywords.map((dict) => {
-                    const [name, link] = Object.entries(dict)[0]; // Assuming each dictionary has only one key-value pair
-                    return `${name}: <a href="${link}" target="_blank">click here</a>`;
+                document.querySelector('#searchForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    // Get the keywords from the form input
+                    const keywords = document.getElementById('keywords').value;
+                    // Send a POST request to the Flask endpoint
+                    fetch('/process_keywords', {
+                        method: 'POST',
+                        body: JSON.stringify({ keywords }), // Send keywords as JSON
+                        headers: {
+                            'Content-Type': 'application/json', // Use JSON content type
+                        },
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        displayKeywords(data);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
                 });
-                    const resultHTML = `<p>Job Listings that match at least one of the keywords:<br><br>${formattedKeywords.join('<br>')}</p>`;
-                resultContainer.innerHTML = resultHTML;
-            }
+            </script>
 
-            document.querySelector('form').addEventListener('submit', function (event) {
-                event.preventDefault();
-                // Get the keywords from the form input
-                const keywords = document.getElementById('keywords').value;
 
-                // Send a POST request to the Flask endpoint
-                fetch('/process_keywords', {
-                    method: 'POST',
-                    body: new URLSearchParams({ keywords }),
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    displayKeywords(data);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-            });
-        </script>
+    </div>
+    <footer></footer>
+    <script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/custom.js') }}"></script> -->
 </body>
+
 </html>
