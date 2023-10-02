@@ -36,5 +36,11 @@ def process_keywords():
         print(keywords)
         return keywords
 
+@app.route('/contacts.html')
+def contacts():
+    # Add code here to render the "contacts.html" template
+    # For example:
+    return render_template('contacts.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
