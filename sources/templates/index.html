@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Job Database</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.min.css') }}">
-    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/custom.css') }}">
 </head>
 
 <body>
@@ -49,22 +49,22 @@
                 function displayKeywords(keywords) {
                     const resultContainer = document.getElementById('result-container');
                     if (keywords.length === 0) {
-                        resultContainer.innerHTML = `<p>No keywords found.</p>`;
+                        resultContainer.innerHTML = `<p><br>No keywords found.</p><br>`;
                         return;
                     }
-                    // Create an array of formatted strings for each keyword
+                    // Creates an array of formatted strings for each keyword
                     const formattedKeywords = keywords.map((keyword) => {
-                        return `<a href="${keyword.link}" target="_blank">${keyword.name}</a>`;
+                        return `<a href="${keyword.link}" target="_blank" class="visited-link">${keyword.name}</a><br>`;
                     });
-                    const resultHTML = `<p>Job Listings that match at least one of the keywords:<br><br>${formattedKeywords.join(', ')}</p>`;
+                    const resultHTML = `<p><br>Job Listings that match at least one of the keywords:<br><br>${formattedKeywords.join('')}</p>`;
                     resultContainer.innerHTML = resultHTML;
                 }
 
                 document.querySelector('#searchForm').addEventListener('submit', function (event) {
                     event.preventDefault();
-                    // Get the keywords from the form input
+                    // Gets the keywords from the form input
                     const keywords = document.getElementById('keywords').value;
-                    // Send a POST request to the Flask endpoint
+                    // Sends a POST request to the Flask endpoint
                     fetch('/process_keywords', {
                         method: 'POST',
                         body: JSON.stringify({ keywords }), // Send keywords as JSON

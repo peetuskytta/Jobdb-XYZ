@@ -21,8 +21,9 @@ def search_database(sql_connection, words: list):
         categories = item[1].split(' ')
         for keyword in words:
             if keyword in categories:
-                jobs.append({item[0]:item[2]})
+                jobs.append({"name": item[0], "link": item[2]})
                 break
     # Close the cursor and return the results
     cursor.close()
     return jobs
+
