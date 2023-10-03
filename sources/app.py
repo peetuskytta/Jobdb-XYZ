@@ -22,12 +22,12 @@ def process_keywords():
         keywords = data.get('keywords')
         keywords = keywords.split()
         keywords = list(map(str.lower, keywords))
-        db_name = open_database("database/jobs.db")
 
         #client_ip = request.remote_addr
         #current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         #app.logger.info(f'Received request at {current_time} from {client_ip}')
 
+        db_name = open_database("database/jobs.db")
         if db_name != None:
             results = search_database(db_name, keywords)
             return jsonify(results)
@@ -36,11 +36,6 @@ def process_keywords():
 def contacts():
     # Renders the "contacts.html" template when About link is clicked
     return render_template('contacts.html')
-
-#@app.route('/project')
-#def project():
-    #Renders the "project.html" template when project link is clicked
-    #return render_template('contacts.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

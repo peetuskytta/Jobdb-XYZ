@@ -4,13 +4,11 @@
 #       Authors: Asukava & Pskytta, Hive Helsinki students
 ##
 
-import requests
-from utility_functions import *
+import requests, sys
+from database_actions import database_inserts
+from job_functions import *
 from bs4 import BeautifulSoup
-from classes import Job
 from url_gen import url_gen
-import sys
-import re
 
 index = 2
 base_url = 'https://duunitori.fi'
@@ -50,5 +48,5 @@ while page_found:
     response = None
     page_number += 1
 
-print("\nTotal pages processed: ", page_number)
+print("\nTotal pages processed: ", page_number - 1)
 database_inserts(job_list)
