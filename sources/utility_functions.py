@@ -23,7 +23,7 @@ def save_job(data, url):
     return new_job
 
 def database_inserts(jobs_list: list):
-    if testAndActConnection("/opt/database/jobs.db", jobs_list) == True:
+    if testAndActConnection("database/jobs.db", jobs_list) == True:
         #later collect this to a log and redirect err messages to errlog in the Oracle Linux
         pass
     else:
@@ -83,6 +83,7 @@ def categorize_job(filename: str, job: Job):
         html = response.content
         soup = BeautifulSoup(html, 'html.parser')
         description = soup.find('div', class_='gtm-apply-clicks description description--jobentry')
+
         # The following check eliminates the possible Demo page which would cause an error
         # as description would return None.
         if description:
@@ -90,8 +91,8 @@ def categorize_job(filename: str, job: Job):
             div_text = description.get_text()
             job.description = div_text
             for word in terms:
-                if word.lower() in div_text.lower():
+                if word in div_text:
                     if word not in result:
-                        result.append(word.lower())
+                        result.append(word)
             for item in result:
                 job.category += item + " "
