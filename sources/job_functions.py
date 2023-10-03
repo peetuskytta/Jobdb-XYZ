@@ -6,7 +6,7 @@ def categorize_job(filename: str, job: Job):
     response = requests.get(job.url)
     if response.status_code == 200:
         with open(filename, "r") as file:
-            terms = file.read().split()
+            terms = file.read().split('\n')
         html = response.content
         soup = BeautifulSoup(html, 'html.parser')
         description = soup.find('div', class_='gtm-apply-clicks description description--jobentry')
