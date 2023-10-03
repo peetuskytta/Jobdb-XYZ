@@ -21,7 +21,6 @@ def process_keywords():
         data = request.get_json()
         keywords = data.get('keywords')
         keywords = keywords.split()
-        keywords = list(map(str.lower, keywords))
 
         #client_ip = request.remote_addr
         #current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
