@@ -17,6 +17,7 @@ def search_database(sql_connection, words: list):
     # Fetch all the titles, category and link
     titles = cursor.fetchall()
     jobs = []
+    print(words)
     for item in titles:
         categories = item[1].split(' ')
         for keyword in words:

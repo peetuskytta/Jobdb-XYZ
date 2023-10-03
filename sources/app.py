@@ -21,7 +21,7 @@ def process_keywords():
         data = request.get_json()
         keywords = data.get('keywords')
         keywords = keywords.split()
-        keywords = list(map(str.lower, keywords))
+        #keywords = list(map(str.lower, keywords))
         db_name = open_database("database/jobs.db")
 
         #client_ip = request.remote_addr
