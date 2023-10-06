@@ -2,44 +2,78 @@
 <html>
 <head>
     <title>42 for life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        /* for mobile */
+        @media screen and (max-width: 600px) {
+            label, input, input[type="submit"] {
+                width: 100%;
+            }
+        }
+        /* for PC */
+        @media screen and (min-width: 601px) {
+            form {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Search the Database</h1>
+    <h2>Search the IT Job Database:<br></h2>
+    <h5>
+        Example: "Java Linux Cloud" use space as a separator.<br>
+    </h5>
     <form method="POST" action="/process_keywords">
-        <label for="keywords">Keywords (up to 5, space-separated):</label>
+        <label for="keywords">Search:</label>
         <input type="text" id="keywords" name="keywords" required><br><br>
         <input type="submit" value="Submit">
     </form>
 
-        <!-- Display area for the returned data -->
+        <!-- Display container for the returned data -->
         <div id="result-container"></div>
 
-        <!-- JavaScript to handle the display of returned data -->
+        <!-- JavaScript to handle the returned data -->
         <script>
             // Function to display the returned data
             function displayKeywords(keywords) {
                 const resultContainer = document.getElementById('result-container');
-                resultContainer.innerHTML = `<p>Processed Keywords: ${keywords.join(', ')}</p>`;
+
+                if (keywords.length === 0) {
+                    resultContainer.innerHTML = `<p>No keywords found.</p>`;
+                    return;
+                }
+
+                // Create an array of formatted strings for each dictionary
+                const formattedKeywords = keywords.map((dict) => {
+                    const [name, link] = Object.entries(dict)[0]; // Assuming each dictionary has only one key-value pair
+                    return `${name}: <a href="${link}" target="_blank">click here</a>`;
+                });
+                    const resultHTML = `<p>Job Listings that match at least one of the keywords:<br><br>${formattedKeywords.join('<br>')}</p>`;
+                resultContainer.innerHTML = resultHTML;
             }
 
-            // Example of how to fetch and display data after form submission (using fetch)
             document.querySelector('form').addEventListener('submit', function (event) {
-                event.preventDefault(); // Prevent the form from submitting in the traditional way
-
+                event.preventDefault();
                 // Get the keywords from the form input
                 const keywords = document.getElementById('keywords').value;
 
-                // Send a POST request to your Flask endpoint
+                // Send a POST request to the Flask endpoint
                 fetch('/process_keywords', {
                     method: 'POST',
-                    body: new URLSearchParams({ keywords }), // Send keywords as form data
+                    body: new URLSearchParams({ keywords }),
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
                 })
-                .then((response) => response.json()) // Assuming the response is JSON
+                .then((response) => response.json())
                 .then((data) => {
-                    // Display the returned data
                     displayKeywords(data);
                 })
                 .catch((error) => {

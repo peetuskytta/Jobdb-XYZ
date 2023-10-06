@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request, jsonify
+from dbsearch import *
+import logging
+import datetime
 
 app = Flask(__name__)
+log_file = 'app.log'
+handler = logging.FileHandler(log_file)
+app.logger.addHandler(handler)
+app.logger.setLevel(logging.INFO)
 
 @app.route('/')
 def index():
@@ -10,14 +17,19 @@ def index():
 
 def process_keywords():
     if request.method == 'POST':
-        keywords = request.form.get('keywords').split(' ')
+        keywords = request.form.get('keywords')
+        keywords = keywords.split(' ')
+        keywords = list(map(str.lower, keywords))
+        db_name = open_database("database/jobs.db")
 
-        
-        # add your keyword processing logic here, check in the SQLite database
-        #print("Keywords:", keywords)
-        return jsonify(keywords)
+        client_ip = request.remote_addr
 
-    return "Keywords processed successfully!"
+        current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        app.logger.info(f'Received request at {current_time} from {client_ip}')
+
+        if db_name != None:
+            results = search_database(db_name, keywords)
+            return jsonify(results)
 
 if __name__ == '__main__':
     app.run(debug=True)
