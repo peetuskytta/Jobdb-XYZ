@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>42 for life</title>
+</head>
+<body>
+    <h1>Search the Database</h1>
+    <form method="POST" action="/process_keywords">
+        <label for="keywords">Keywords (up to 5, space-separated):</label>
+        <input type="text" id="keywords" name="keywords" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+        <!-- Display area for the returned data -->
+        <div id="result-container"></div>
+
+        <!-- JavaScript to handle the display of returned data -->
+        <script>
+            // Function to display the returned data
+            function displayKeywords(keywords) {
+                const resultContainer = document.getElementById('result-container');
+                resultContainer.innerHTML = `<p>Processed Keywords: ${keywords.join(', ')}</p>`;
+            }
+
+            // Example of how to fetch and display data after form submission (using fetch)
+            document.querySelector('form').addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the form from submitting in the traditional way
+
+                // Get the keywords from the form input
+                const keywords = document.getElementById('keywords').value;
+
+                // Send a POST request to your Flask endpoint
+                fetch('/process_keywords', {
+                    method: 'POST',
+                    body: new URLSearchParams({ keywords }), // Send keywords as form data
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                })
+                .then((response) => response.json()) // Assuming the response is JSON
+                .then((data) => {
+                    // Display the returned data
+                    displayKeywords(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            });
+        </script>
+</body>
+</html>

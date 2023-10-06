@@ -1,7 +1,7 @@
 ##
 #	Project name: Crawler
 #	Description: a crawler/scraper to search specific job titles from Duunitori.fi
-#	Authors: Asukava & Pskytta, Hive Helsinki Alumni
+#	Authors: Asukava & Pskytta, Hive Helsinki students
 ##
 
 import requests
@@ -9,10 +9,11 @@ from utility_functions import *
 from bs4 import BeautifulSoup
 from classes import Job
 from url_gen import url_gen
+import sys
 
 index = 2
 base_url = 'https://duunitori.fi'
-seach_url = url_gen("titles")
+seach_url = url_gen("files/titles")
 page_found = True
 page_number = 1
 job_list = [] # creates an empty list
@@ -38,10 +39,13 @@ while page_found:
         if response.status_code == 404:
             #print(f"Page {page_number}: not found")
             page_found = False
+    sys.stdout.flush()
+    sys.stdout.write("\rNumber of pages processed: %d" % page_number)
     response = None
     page_number += 1
 
-#Connect to a database usig SQLite and add the list of jobs to database table
+# Connect to a database usig SQLite and add the list of jobs to database table
+print("\nTotal pages processed: ", page_number)
 db_actions(job_list)
 #for Job in job_list:
 #	print(Job)
