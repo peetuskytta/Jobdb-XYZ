@@ -23,7 +23,7 @@ def save_job(data, url):
     return new_job
 
 def database_inserts(jobs_list: list):
-    if testAndActConnection("/opt/database/jobs.db", jobs_list) == True:
+    if testAndActConnection("database/jobs.db", jobs_list) == True:
         #later collect this to a log and redirect err messages to errlog in the Oracle Linux
         pass
     else:
