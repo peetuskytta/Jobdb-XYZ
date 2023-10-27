@@ -20,7 +20,7 @@ def search_database(sql_connection, words: list):
     for item in titles:
         categories = item[1].split(' ')
         for keyword in words:
-            if keyword in categories:
+            if keyword.lower() in categories:
                 jobs.append({"name": item[0], "link": item[2]})
                 break
     # Close the cursor and return the results
