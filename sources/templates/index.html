@@ -1,16 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="light" lang="en">
+
 <head>
-    <title>Job Search System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
 </head>
+
 <body>
-    <h1>Keyword Processing</h1>
-    <form method="POST" action="/process_keywords">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-        <label for="keywords">Keywords (up to 5, comma-separated):</label>
-        <input type="text" id="keywords" name="keywords" required><br><br>
-        <input type="submit" value="Submit">
-    </form>
+    <nav class="navbar navbar-expand-md fixed-top navbar-shrink py-3 navbar-light" id="mainNav">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>JobDatabase</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1" style="margin-left: 449px;">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html"><span style="color: rgb(0, 0, 0);">About</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-md fixed-top navbar-shrink py-3 navbar-light" id="mainNav">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>JobDatabase</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1" style="margin-left: 449px;">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html"><span style="color: rgb(0, 0, 0);">About</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="pt-5">
+        <div class="container pt-4 pt-xl-5">
+            <div class="row pt-5">
+                <div class="col-md-8 text-center text-md-start mx-auto">
+                    <div class="text-center">
+                        <h4 class="display-4 fw-bold mb-5" style="font-size: 30.3px;">Search database using coding languages, technologies or frameworks</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <form id="searchForm" action="/process_keywords" method="POST">
+            <div class="input-group"><input class="form-control" type="text" id="searchInput" placeholder="example: Python Kotlin C++">
+                <div class="input-group-append"><button class="btn btn-primary" id="searchButton" type="submit">submit</button></div>
+            </div>
+        </form>
+    </div>
+    <footer></footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/startup-modern.js"></script>
 </body>
+
 </html>
