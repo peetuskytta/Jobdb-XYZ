@@ -5,11 +5,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>About</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/custom.css') }}">
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-md fixed-top navbar-shrink py-3 navbar-light" id="mainNav">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>JobDatabase</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><strong span style="color: rgb(0, 0, 0);">Home</strong></span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contacts.html"><strong span style="color: rgb(0, 0, 0);">About</strong></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <header class="pt-5">
         <div class="container pt-4 pt-xl-5">
             <div class="row pt-5">
@@ -21,22 +31,9 @@
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-expand-md fixed-top navbar-shrink py-3 navbar-light" id="mainNav">
-            <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>JobDatabase</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navcol-1">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="/"><strong><!span style="color: rgb(0, 0, 0);">Home</strong><!/span></a></li>
-                        <li class="nav-item"><a class="nav-link active" href="contacts.html"><!strong span style="color: rgb(0, 0, 0);">About</strong><!/span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
     </header>
-    <section></section>
-    <section></section>
-    <section class="py-4 py-xl-5"></section>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/startup-modern.js"></script>
+    <script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/custom.js') }}"></script> -->
 </body>
 
 </html>
