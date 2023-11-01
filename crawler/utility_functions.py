@@ -1,7 +1,3 @@
-##
-#       Contains useful functions for the project.
-##
-
 import sqlite3 as db
 from classes import Job
 from bs4 import BeautifulSoup
