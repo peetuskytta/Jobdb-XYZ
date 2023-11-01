@@ -4,6 +4,8 @@
 #       Authors: Asukava & Pskytta, Hive Helsinki students
 ##
 
-from duunitori_crawler import duunitori_crawler
+from crawlers import *
 
 duunitori_crawler()
+#jobly_crawler
+#academicwork_crawler
