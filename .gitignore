@@ -2,11 +2,10 @@ venv/
 myenv/
 test
 *.txt
-notes
+files/sqlite.notes
 scraperenv/
 __pycache__/
 .vscode/
 database/jobs.db
 files/peetu.notes
 app.log
-templates/cp_index.html

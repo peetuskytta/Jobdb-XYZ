@@ -11,8 +11,7 @@ def del_doubles(sym, string) -> str:
 #   Function reads list of titles from file, turns them in to a string,
 #   deletes unwanted newlines, converts certain symbols to URL-language
 #   and then joins it with a proper URL-head to create a working URL.
-def url_gen(filename: str) -> str:
-    base = 'https://duunitori.fi/tyopaikat?filter_work_type=full_time&haku='
+def url_gen(filename: str, base: str) -> str:
     file = open(filename, "r")
     string = "".join(file)
     string = del_doubles("\n", string)

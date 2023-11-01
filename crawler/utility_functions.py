@@ -1,10 +1,4 @@
 import sqlite3 as db
-<<<<<<< HEAD:sources/database_actions.py
-import json
-
-def database_inserts(jobs_list: list):
-    if testAndActConnection("database/jobs.db", jobs_list) == True:
-=======
 from classes import Job
 from bs4 import BeautifulSoup
 import requests
@@ -28,7 +22,6 @@ def save_job(data, url):
 def database_inserts(jobs_list: list):
     if testAndActConnection("database/jobs.db", jobs_list) == True:
         #later collect this to a log and redirect err messages to errlog in the Oracle Linux
->>>>>>> main:crawler/utility_functions.py
         pass
     else:
         job_dicts = [job.__dict__ for job in jobs_list]

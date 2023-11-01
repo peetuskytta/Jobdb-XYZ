@@ -1,5 +1,5 @@
 ##
-#   A class Job.
+#   Add any new classes to this file.
 ##
 
 class Job:
@@ -13,16 +13,7 @@ class Job:
 
         # This defines how the class job should be printed.
     def __str__(self):
-<<<<<<< HEAD:sources/job.py
-        return f"""ID: {self.id}\n
-            Job Title:{self.title}\n\n
-            Description:\n{self.description}\n\n
-            URL: {self.url}\n\n
-            Category: {self.category}\n\n
-            Level: {self.level}"""
-=======
         return f"ID: {self.id}\nJob Title: {self.title}\n\nDescription:\n{self.description}\n\nURL: {self.url}\n\nCategory: {self.category}"
 
     def to_dict(self):
         return vars(self)
->>>>>>> main:crawler/classes.py
