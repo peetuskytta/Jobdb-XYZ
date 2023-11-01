@@ -1,5 +1,7 @@
 Authors: Asukava & Pskytta, Hive Helsinki Alumni
 
+![Alt text](crawler/files/jobdbpage.png)
+
 ### What?
 A Python web crawler / web app to search the database for IT job postings.
 
