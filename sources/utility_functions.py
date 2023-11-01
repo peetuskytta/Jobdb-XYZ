@@ -6,6 +6,7 @@ import sqlite3 as db
 from classes import Job
 from bs4 import BeautifulSoup
 import requests
+import json
 
 def save_job(data, url):
     date = data.find('span', class_='job-box__job-posted').text
@@ -32,8 +33,8 @@ def database_inserts(jobs_list: list):
 def testAndActConnection(db_name: str, jobs_list: list):
     sqlConnection = None
     try:
-        print("Connection to database was successful. Initiating the data insertion...")
         sqlConnection = db.connect(db_name)
+        print("Connection to database was successful. Initiating the data insertion...")
         cursor = sqlConnection.cursor()
         cursor.execute("""
                 CREATE TABLE IF NOT EXISTS jobs (

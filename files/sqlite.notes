@@ -23,7 +23,10 @@ Examples:
 	PRAGMA table_info(<name>);
 		- this will print information about the table and its
 		  columns (types, etc)
-	
+
+    SELECT COUNT(*) FROM jobs;
+        - counts all items from jobs table
+
 
 	IMPORTANT TIP:
 	Using tabs after a couple of letters will suggest SQL commands for you to
@@ -34,4 +37,4 @@ Examples:
 	.exit
 		- saves, commits and exits
 
-	
+

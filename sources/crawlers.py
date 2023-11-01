@@ -9,7 +9,7 @@ import sys
 def duunitori_crawler():
     base_url = 'https://duunitori.fi'
     search_url = 'https://duunitori.fi/tyopaikat?filter_work_type=full_time&haku='
-    url = url_gen("../files/titles", search_url)
+    url_done = url_gen("../files/titles", search_url)
     index = 2
     page_found = True
     page_number = 1
@@ -17,11 +17,11 @@ def duunitori_crawler():
 
     while page_found:
         if page_number == 1:
-            response = requests.get(url)
+            response = requests.get(url_done)
             if response.status_code == 503:
                 raise ConnectionError("Under maintenance")
         else:
-            url = url + "&sivu=" + str(index)
+            url = url_done + "&sivu=" + str(index)
             response = requests.get(url)
             index += 1
         if response.status_code == 200:

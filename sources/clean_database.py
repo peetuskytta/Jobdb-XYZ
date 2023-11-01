@@ -2,24 +2,28 @@ import sqlite3 as db
 from bs4 import BeautifulSoup
 import requests
 
-database = "database/jobs.db"
+database = "/opt/database/jobs.db"
 
 # TEST THIS LINK FOR EXAMPLE:
 # https://duunitori.fi/tyopaikat/tyo/senior-java-developer-relocation-to-switzerland-scsom-14504783
 
 def checkForOld(links: dict) -> list:
     toDelete = [] # Store the ID to be removed from Database
+    counter = 0
     for key, value in links.items():
         response = requests.get(value)
-        if response.status_code == 200:
+        if value == "ERROR":
+            toDelete.append(key)
+            counter += 1
+        elif response.status_code == 200:
             html = response.content
             soup = BeautifulSoup(html, 'html.parser')
             grid = soup.find_all('h2', class_='text--warning')
             if grid:
                 toDelete.append(key)
-                print("    yes")
-        print("NO")
-    print(toDelete)
+                counter += 1
+    print(f"Number of items to be deleted from the database: {counter}")
+    return toDelete
 
 
 def open_database(db_name):
@@ -28,18 +32,28 @@ def open_database(db_name):
         sqlConnection = db.connect(db_name)
         cursor = sqlConnection.cursor()
         cursor.execute("""
-            SELECT link, id FROM jobs;
+            SELECT link, id, title FROM jobs;
             """)
         rows = cursor.fetchall()
         linksToTest = {} # Collect ID and link
+        errorCases = ["C-kortillinen", "C-kortillisia", "hoitaja", "Esperi", "sairaanhoidon"]
         for row in rows:
-            link_val, id_val = row
-            linksToTest[id_val] = link_val
-        cursor.close()
-        #for key, value in linksToTest.items():
-        #    print(key, value)
+            link_val, id_val, title = row
+            if row[2] in errorCases:
+                linksToTest[id_val] = "ERROR"
+            else:
+                linksToTest[id_val] = link_val
 
         toDelete = checkForOld(linksToTest)
+
+        for id in toDelete:
+            cursor.execute("SELECT id FROM jobs WHERE id = ?", (id,))
+            existing_id = cursor.fetchone()
+            if existing_id:
+                cursor.execute("DELETE FROM jobs WHERE id = ?", (id,))
+                print("Deleted")
+        sqlConnection.commit()
+        cursor.close()
 
     except db.Error as error:
         print("Error while connecting to SQLite database: ", error)
