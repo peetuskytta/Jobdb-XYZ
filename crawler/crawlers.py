@@ -31,7 +31,7 @@ def duunitori_crawler():
             for div in job_grid:
                 job = save_job(div, base_url)
                 if job:
-                    categorize_job("../files/languages", job)
+                    categorize_job("files/languages", job)
                     if job.category != "empty" and job.description != None:
                         job_list.append(job)
         else:
