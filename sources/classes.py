@@ -14,3 +14,6 @@ class Job:
         # This defines how the class job should be printed.
     def __str__(self):
         return f"ID: {self.id}\nJob Title: {self.title}\n\nDescription:\n{self.description}\n\nURL: {self.url}\n\nCategory: {self.category}"
+
+    def to_dict(self):
+        return vars(self)
