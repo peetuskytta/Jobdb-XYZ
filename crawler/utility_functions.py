@@ -13,14 +13,14 @@ def save_job(data, url):
     job_title = data.h3.text
     job_id = data.a['data-id']
     job_link = url + data.a['href']
-    job_description = None
+    job_descr = None
     job_category = ""
-    job_level = ""
-    new_job = Job(job_title, job_id, job_link, job_description, job_category, job_level)
+    job_lvl = ""
+    new_job = Job(job_title, job_id, job_link, job_descr, job_category, job_lvl)
     return new_job
 
 def database_inserts(jobs_list: list):
-    if testAndActConnection("database/jobs.db", jobs_list) == True:
+    if testAndActConnection("../database/jobs.db", jobs_list) == True:
         #later collect this to a log and redirect err messages to errlog in the Oracle Linux
         pass
     else:
@@ -41,9 +41,9 @@ def testAndActConnection(db_name: str, jobs_list: list):
                 id INTEGER,
                 title TEXT,
                 link TEXT,
-                description TEXT,
+                descr TEXT,
                 category TEXT,
-                level TEXT
+                lvl TEXT
             )
         """)
         cursor.execute("SELECT id FROM jobs")
@@ -54,8 +54,8 @@ def testAndActConnection(db_name: str, jobs_list: list):
             if job.id in compareIds:
                 continue
             else:
-                query = "INSERT INTO jobs (id, title, link, description, category, level) VALUES (?, ?, ?, ?, ?, ?)"
-                values = (job.id, job.title, job.url, job.description, job.category, job.level)
+                query = "INSERT INTO jobs (id, title, link, descr, category, lvl) VALUES (?, ?, ?, ?, ?, ?)"
+                values = (job.id, job.title, job.url, job.descr, job.category, job.lvl)
                 cursor.execute(query, values)
                 compareIds.append(job.id)
                 sqlConnection.commit()
@@ -74,3 +74,24 @@ def testAndActConnection(db_name: str, jobs_list: list):
             return True
         else:
             return False
+
+def categorize_job(filename: str, job: Job):
+    response = requests.get(job.url)
+    if response.status_code == 200:
+        with open(filename, "r") as file:
+            terms = file.read().split()
+        html = response.content
+        soup = BeautifulSoup(html, 'html.parser')
+        description = soup.find('div', class_='gtm-apply-clicks description description--jobentry')
+        # The following check eliminates the possible Demo page which would cause an error
+        # as description would return None.
+        if description:
+            result = []
+            div_text = description.get_text()
+            job.descr = div_text
+            for word in terms:
+                if word.lower() in div_text.lower():
+                    if word not in result:
+                        result.append(word.lower())
+            for item in result:
+                job.category += item + " "
