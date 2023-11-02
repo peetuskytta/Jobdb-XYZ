@@ -31,13 +31,10 @@ def identify_lvl():
         # Perform your analysis here and determine the value for lvl
         if "senior" in title.lower() or "senior" in description.lower() or "kokenut" in description.lower():
             lvl = "senior"
-            print("senior")
         elif "junior" in title.lower() or "junior" in description.lower() or "trainee" in description.lower():
             lvl = "junior"
-            print(" junior")
         else:
             lvl = "unknown"
-            print("     unknown")
 
         # Update the database with the new lvl value
         cursor.execute("UPDATE jobs SET lvl = ? WHERE id = ?", (lvl, record_id))
@@ -74,9 +71,7 @@ def duunitori_crawler():
                 job = save_job(div, base_url)
                 if job:
                     categorize_job("files/languages", job)
-                    #print(job)
                     if job.category != "empty" and job.descr != None:
-                        print(job)
                         job_list.append(job)
         else:
             if response.status_code == 503:
