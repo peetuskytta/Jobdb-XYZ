@@ -2,7 +2,7 @@ import sqlite3 as db
 from bs4 import BeautifulSoup
 import requests
 
-database = "/opt/database/jobs.db"
+database = "../database/jobs.db"
 
 # TEST THIS LINK FOR EXAMPLE:
 # https://duunitori.fi/tyopaikat/tyo/senior-java-developer-relocation-to-switzerland-scsom-14504783
@@ -24,7 +24,7 @@ def checkForOld(links: dict) -> list:
     return toDelete
 
 
-def open_database(db_name):
+def clean_database(db_name):
     sqlConnection = None
     try:
         sqlConnection = db.connect(db_name)
@@ -34,7 +34,7 @@ def open_database(db_name):
             """)
         rows = cursor.fetchall()
         linksToTest = {} # Collect ID and link
-        errorCases = ["C-kortillinen", "C-kortillisia", "hoitaja", "Esperi", "sairaanhoidon"]
+        errorCases = ["C-kortillinen", "C-kortillisia", "hoitaja", "Esperi", "sairaanhoidon", "myyjiä", "myyjä"]
         for row in rows:
             link_val, id_val, title, category = row
             if row[2] in errorCases:
@@ -62,4 +62,4 @@ def open_database(db_name):
             print("Success and done")
         return
 
-open_database(database)
+clean_database(database)

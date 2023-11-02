@@ -9,3 +9,4 @@ from crawlers import *
 duunitori_crawler()
 #jobly_crawler
 #academicwork_crawler
+identify_lvl()

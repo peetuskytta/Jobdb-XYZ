@@ -13,17 +13,20 @@ def save_job(data, url):
     job_title = data.h3.text
     job_id = data.a['data-id']
     job_link = url + data.a['href']
-    job_description = None
+    job_descr = None
     job_category = ""
-    job_level = ""
-    new_job = Job(job_title, job_id, job_link, job_description, job_category, job_level)
+    job_lvl = ""
+    new_job = Job(job_title, job_id, job_link, job_descr, job_category, job_lvl)
     return new_job
 
 def database_inserts(jobs_list: list):
-    if testAndActConnection("database/jobs.db", jobs_list) == True:
+    if testAndActConnection("../database/jobs.db", jobs_list) == True:
         #later collect this to a log and redirect err messages to errlog in the Oracle Linux
         pass
     else:
+        job_dicts = [job.__dict__ for job in jobs_list]
+        with open("database/job_list.json", 'w') as file:
+            json.dump(job_dicts, file, indent=2)
         return
 
 def testAndActConnection(db_name: str, jobs_list: list):
@@ -38,9 +41,9 @@ def testAndActConnection(db_name: str, jobs_list: list):
                 id INTEGER,
                 title TEXT,
                 link TEXT,
-                description TEXT,
+                descr TEXT,
                 category TEXT,
-                level TEXT
+                lvl TEXT
             )
         """)
         cursor.execute("SELECT id FROM jobs")
@@ -51,8 +54,8 @@ def testAndActConnection(db_name: str, jobs_list: list):
             if job.id in compareIds:
                 continue
             else:
-                query = "INSERT INTO jobs (id, title, link, description, category, level) VALUES (?, ?, ?, ?, ?, ?)"
-                values = (job.id, job.title, job.url, job.description, job.category, job.level)
+                query = "INSERT INTO jobs (id, title, link, descr, category, lvl) VALUES (?, ?, ?, ?, ?, ?)"
+                values = (job.id, job.title, job.url, job.descr, job.category, job.lvl)
                 cursor.execute(query, values)
                 compareIds.append(job.id)
                 sqlConnection.commit()
@@ -85,7 +88,7 @@ def categorize_job(filename: str, job: Job):
         if description:
             result = []
             div_text = description.get_text()
-            job.description = div_text
+            job.descr = div_text
             for word in terms:
                 if word.lower() in div_text.lower():
                     if word not in result:
