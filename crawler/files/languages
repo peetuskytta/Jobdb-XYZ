@@ -2,8 +2,6 @@ C++
 C#
 Objective-C
 Python
-Jython
-IronPython
 Java
 Kotlin
 Scala
@@ -12,11 +10,11 @@ JavaScript
 TypeScript
 CoffeeScript
 Ruby
-Ruby on Rails
 PHP
 Perl
 Swift
 Go
+Golang
 Rust
 MATLAB
 SQL
@@ -31,12 +29,13 @@ Flutter
 COBOL
 Fortran
 Lisp
-Common Lisp
 Scheme
 Prolog
 Assembly Language
+Assembly
 VHDL
 Ada
+Jira
 Erlang
 Clojure
 F#
@@ -58,14 +57,12 @@ Keras
 ASP.NET
 Hibernate
 JUnit
-Ruby Sinatra
 Node.js
 Django
 Flutter
 Linux
 Mac
 Windows
-SQL
 MySQL
 PostgreSQL
 SQLite

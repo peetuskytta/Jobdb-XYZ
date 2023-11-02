@@ -38,6 +38,11 @@
             </div>
         </form>
 
+            <div id="filterButtons" style="display: none;">
+                <button class="btn btn-primary" id="filterAll">Show All</button>
+                <button class="btn btn-primary" id="filterPython">Python</button>
+            </div>
+
             <!-- Display container for the returned data -->
             <div id="result-container"></div>
 
@@ -45,38 +50,47 @@
                 // Function to display the returned data
                 function displayKeywords(keywords) {
                     const resultContainer = document.getElementById('result-container');
-                    if (keywords.length === 0) {
+
+                    if (!keywords || keywords.length === 0) {
                         resultContainer.innerHTML = `<p><br>No keywords found.</p><br>`;
                         return;
                     }
-                    // Creates an array of formatted strings for each keyword
+
                     const formattedKeywords = keywords.map((keyword) => {
                         return `<a href="${keyword.link}" target="_blank" class="visited-link">${keyword.name}</a><br>`;
                     });
+
                     const resultHTML = `<p><br>Job Listings that match at least one of the keywords:<br><br>${formattedKeywords.join('')}</p>`;
+
                     resultContainer.innerHTML = resultHTML;
                 }
 
                 document.querySelector('#searchForm').addEventListener('submit', function (event) {
                     event.preventDefault();
-                    // Gets the keywords from the form input
+
                     const keywords = document.getElementById('keywords').value;
-                    // Sends a POST request to the Flask endpoint
+
                     fetch('/process_keywords', {
                         method: 'POST',
-                        body: JSON.stringify({ keywords }), // Send keywords as JSON
+                        body: JSON.stringify({ keywords }),
                         headers: {
-                            'Content-Type': 'application/json', // Use JSON content type
+                            'Content-Type': 'application/json',
                         },
                     })
                     .then((response) => response.json())
                     .then((data) => {
-                        displayKeywords(data);
+                        if (data) {
+                            document.getElementById('filterButtons').style.display = 'block';
+                            displayKeywords(data);
+                        } else {
+                            console.error('No data received from the server.');
+                        }
                     })
                     .catch((error) => {
                         console.error('Error:', error);
                     });
                 });
+
             </script>
 
 
