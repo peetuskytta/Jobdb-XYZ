@@ -26,7 +26,7 @@ def process_keywords():
         #current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         #app.logger.info(f'Received request at {current_time} from {client_ip}')
 
-        db_name = open_database("database/jobs.db")
+        db_name = open_database("../database/jobs.db")
         if db_name != None:
             results = search_database(db_name, keywords)
             return jsonify(results)
