@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from classes import Job
 from url_gen import url_gen
 import sys
+import time
 import sqlite3 as db
 
 def open_database(db_name: str):
@@ -87,5 +88,33 @@ def duunitori_crawler():
         page_number += 1
 
     # Should be commented out in production as there's no GUI in VM
-    print("\nTotal pages processed: ", page_number)
+    print("\nDuunitori: total pages processed: ", page_number)
     database_inserts(job_list)
+
+def jobly_crawler():
+    # we add the search term in the end of this baseurl
+    baseurl = "https://www.jobly.fi/tyopaikat?search="
+    # Scrape the page for h2 which contains the link and title
+    # Store them as a list of tuples
+    pageIndex = 0
+    jobs = []
+
+    with open("files/jobly", "r") as file:
+        searchTerms = file.read().split('\n')
+    for word in searchTerms:
+        try:
+            searchurl = baseurl + word + "&page=" + str(pageIndex)
+            print(searchurl)
+            response = requests.get(searchurl)
+            if response.status_code == 200:
+                html = response.content
+                soup = BeautifulSoup(html, 'html.parser')
+                job_grid = soup.find_all('a', class_='recruiter-job-link')
+                for div in job_grid:
+                    print(div)
+                    print("\n\n")
+                #print(baseurl + word)
+        except:
+            raise ConnectionError(response)
+        finally:
+            print(f"jobly: ({word}) done!")

@@ -4,7 +4,16 @@ from bs4 import BeautifulSoup
 import requests
 import json
 
-def save_job(data, url):
+def save_job(data, url: str, id: str):
+    if id == "duuni":
+        jobs_duunitori(data, url)
+    if id == "jobly":
+        jobs_jobly()
+
+def jobs_jobly():
+    print("SAVE the job")
+
+def jobs_duunitori(data, url):
     date = data.find('span', class_='job-box__job-posted').text
     if date[-1] == "." or date[-1] == "3":
         pass
