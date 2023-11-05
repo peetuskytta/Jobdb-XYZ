@@ -25,5 +25,6 @@ def search_database(sql_connection, words: list):
                 break
     # Close the cursor and return the results
     cursor.close()
+    sql_connection.close()
     return jobs
 
