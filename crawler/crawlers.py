@@ -67,7 +67,7 @@ def duunitori_crawler():
             soup = BeautifulSoup(html, 'html.parser')
             job_grid = soup.find_all('div', class_='grid grid--middle job-box job-box--lg')
             for div in job_grid:
-                job = save_job(div, base_url)
+                job = save_job(div, base_url, "duuni")
                 if job:
                     categorize_job("files/languages", job, "duuni")
                     duunitori_jobs.append(job)

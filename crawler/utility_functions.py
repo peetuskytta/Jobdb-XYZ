@@ -94,8 +94,6 @@ def dntori(soup, job):
 
 def jobly(soup, job):
     description = soup.find('div', class_='field field--name-body field--type-text-with-summary field--label-hidden')
-    if job.title == "Data-analyytikko":
-        print(soup)
     job.descr = description.text
     return description.text
 
