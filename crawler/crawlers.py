@@ -22,14 +22,14 @@ def identify_lvl():
     db_conn = open_database("../database/jobs.db")
     cursor = db_conn.cursor()
     cursor.execute("SELECT id, title, descr FROM jobs")
-    # Fetch all the titles, category and link
+    # Fetch the id, title, description
     records = cursor.fetchall()
 
     for record in records:
         record_id, title, description = record
         lvl = ""
 
-        # Perform your analysis here and determine the value for lvl
+        # Determine the value for lvl
         if "senior" in title.lower() or "senior" in description.lower() or "kokenut" in description.lower():
             lvl = "senior"
         elif "junior" in title.lower() or "junior" in description.lower() or "trainee" in description.lower():
@@ -43,7 +43,6 @@ def identify_lvl():
         # Commit changes and close the connection
     db_conn.commit()
     db_conn.close()
-
 
 
 def duunitori_crawler():

@@ -33,11 +33,11 @@ def clean_database(db_name):
             SELECT link, id, title, category FROM jobs;
             """)
         rows = cursor.fetchall()
-        linksToTest = {} # Collect ID and link
-        errorCases = ["C-kortillinen", "C-kortillisia", "hoitaja", "Esperi", "sairaanhoidon", "myyjiä", "myyjä"]
+        linksToTest = {}
+        errorCases = ["c-kort", "hoitaj", "esperi", "sairaanhoidon", "myyjiä", "myyjä", "lukkoseppä", "fashion", "sosiaali", "inside sales", "attorney", "legal", "marketing", "ecommerce manager", "sähkösuunnittelija", "projektipäälli", "luottoriskianalyytikko", "supervisor/commissioning", "talent acquisition", "doctoral research", "treasury"]
         for row in rows:
             link_val, id_val, title, category = row
-            if row[2] in errorCases:
+            if row[2].lower() in errorCases:
                 linksToTest[id_val] = "ERROR"
             if row[3] == "c on r ":
                 linksToTest[id_val] = "ERROR"
@@ -49,6 +49,7 @@ def clean_database(db_name):
             existing_id = cursor.fetchone()
             if existing_id:
                 cursor.execute("DELETE FROM jobs WHERE id = ?", (item,))
+        cursor.execute("DELETE FROM jobs WHERE title LIKE '%C-%'")
         sqlConnection.commit()
         cursor.close()
 
