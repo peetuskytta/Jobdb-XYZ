@@ -40,7 +40,7 @@ def identify_lvl():
         # Update the database with the new lvl value
         cursor.execute("UPDATE jobs SET lvl = ? WHERE id = ?", (lvl, record_id))
 
-        # Commit changes and close the connection
+    # Commit changes and close the connection
     db_conn.commit()
     db_conn.close()
 
@@ -90,11 +90,10 @@ def duunitori_crawler():
     print("\nDuunitori: total pages processed: ", page_number)
     database_inserts(job_list)
 
+
+### Crawler to find the job postings in Jobly.fi website. ###
 def jobly_crawler():
-    # we add the search term in the end of this baseurl
     baseurl = "https://www.jobly.fi/tyopaikat?search="
-    # Scrape the page for h2 which contains the link and title
-    # Store them as a list of tuples
     pageIndex = 0
     jobs = []
 
