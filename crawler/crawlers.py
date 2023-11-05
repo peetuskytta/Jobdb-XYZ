@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 from classes import Job
 from url_gen import url_gen
 import sys
-import time
 import sqlite3 as db
 
 def open_database(db_name: str):
@@ -48,11 +47,11 @@ def identify_lvl():
 def duunitori_crawler():
     base_url = 'https://duunitori.fi'
     search_url = 'https://duunitori.fi/tyopaikat?filter_work_type=full_time&haku='
-    url_done = url_gen("files/titles", search_url)
+    url_done = url_gen("files/duunitori", search_url)
     index = 2
     page_found = True
     page_number = 1
-    job_list = []
+    duunitori_jobs = []
 
     while page_found:
         if page_number == 1:
@@ -70,9 +69,8 @@ def duunitori_crawler():
             for div in job_grid:
                 job = save_job(div, base_url)
                 if job:
-                    categorize_job("files/languages", job)
-                    if job.category != "empty" and job.descr != None:
-                        job_list.append(job)
+                    categorize_job("files/languages", job, "duuni")
+                    duunitori_jobs.append(job)
         else:
             if response.status_code == 503:
                 raise ConnectionError("Under maintenance")
@@ -88,31 +86,33 @@ def duunitori_crawler():
 
     # Should be commented out in production as there's no GUI in VM
     print("\nDuunitori: total pages processed: ", page_number)
-    database_inserts(job_list)
+    database_inserts(duunitori_jobs)
 
 
 ### Crawler to find the job postings in Jobly.fi website. ###
 def jobly_crawler():
     baseurl = "https://www.jobly.fi/tyopaikat?search="
     pageIndex = 0
-    jobs = []
+    jobly_jobs = []
 
     with open("files/jobly", "r") as file:
         searchTerms = file.read().split('\n')
     for word in searchTerms:
         try:
             searchurl = baseurl + word + "&page=" + str(pageIndex)
-            print(searchurl)
             response = requests.get(searchurl)
             if response.status_code == 200:
                 html = response.content
                 soup = BeautifulSoup(html, 'html.parser')
                 job_grid = soup.find_all('a', class_='recruiter-job-link')
                 for div in job_grid:
-                    print(div)
-                    print("\n\n")
-                #print(baseurl + word)
+                    job = save_job(div, None, "jobly")
+                    if job:
+                        categorize_job("files/languages", job, "jobly")
+                        jobly_jobs.append(job)
         except:
-            raise ConnectionError(response)
+            raise ConnectionError()
         finally:
-            print(f"jobly: ({word}) done!")
+            None
+            #print(f"jobly: ({word}) done!")
+    database_inserts(jobly_jobs)
