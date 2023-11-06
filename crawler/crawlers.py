@@ -2,7 +2,7 @@ import requests
 from utility_functions import *
 from bs4 import BeautifulSoup
 from url_gen import url_gen
-import sys
+#import sys
 
 def duunitori_crawler():
     base_url = 'https://duunitori.fi'
@@ -38,14 +38,14 @@ def duunitori_crawler():
                 page_found = False
 
         # Should be commented out in production as there's no GUI in VM.
-        sys.stdout.flush()
-        sys.stdout.write("\rNumber of pages processed: %d" % page_number)
+        #sys.stdout.flush()
+        #sys.stdout.write("\rNumber of pages processed: %d" % page_number)
 
         response = None
         page_number += 1
 
     # Should be commented out in production as there's no GUI in VM
-    print("\nDuunitori: total pages processed: ", page_number)
+    #print("\nDuunitori: total pages processed: ", page_number)
     database_inserts(duunitori_jobs)
 
 
