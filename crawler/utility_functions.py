@@ -88,9 +88,10 @@ def testAndActConnection(db_name: str, jobs_list: list):
 
 def dntori(soup, job):
     description = soup.find('div', class_='gtm-apply-clicks description description--jobentry')
-    div_text = description.get_text()
-    job.descr = div_text
-    return div_text
+    if description:
+        job.descr = description.get_text()
+        return description.get_text()
+    return None
 
 def jobly(soup, job):
     description = soup.find('div', class_='field field--name-body field--type-text-with-summary field--label-hidden')

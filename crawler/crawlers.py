@@ -29,12 +29,13 @@ def identify_lvl():
         lvl = ""
 
         # Determine the value for lvl
-        if "senior" in title.lower() or "senior" in description.lower() or "kokenut" in description.lower():
-            lvl = "senior"
-        elif "junior" in title.lower() or "junior" in description.lower() or "trainee" in description.lower():
-            lvl = "junior"
-        else:
-            lvl = "unknown"
+        if description and title:
+            if "senior" in title.lower() or "senior" in description.lower() or "kokenut" in description.lower():
+                lvl = "senior"
+            elif "junior" in title.lower() or "junior" in description.lower() or "trainee" in description.lower():
+                lvl = "junior"
+            else:
+                lvl = "unknown"
 
         # Update the database with the new lvl value
         cursor.execute("UPDATE jobs SET lvl = ? WHERE id = ?", (lvl, record_id))
