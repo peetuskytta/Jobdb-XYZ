@@ -88,6 +88,7 @@ def testAndActConnection(db_name: str, jobs_list: list):
 
 def dntori(soup, job):
     description = soup.find('div', class_='gtm-apply-clicks description description--jobentry')
+    # decsription needs to be checked for "sample job posts"
     if description:
         job.descr = description.get_text()
         return description.get_text()
