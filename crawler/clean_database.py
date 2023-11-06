@@ -23,10 +23,10 @@ def checkForOld(links: dict) -> list:
                     toDelete.append(key)
     return toDelete
 
-def clean_database(db_name):
+def clean_database():
     sqlConnection = None
     try:
-        sqlConnection = db.connect(db_name)
+        sqlConnection = db.connect("../database/jobs.db")
         cursor = sqlConnection.cursor()
         cursor.execute("""
             SELECT link, id, title, category FROM jobs;
@@ -60,5 +60,3 @@ def clean_database(db_name):
         if sqlConnection:
             sqlConnection.close()
         return
-
-clean_database(database)
