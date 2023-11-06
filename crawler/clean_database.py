@@ -23,7 +23,6 @@ def checkForOld(links: dict) -> list:
                     toDelete.append(key)
     return toDelete
 
-
 def clean_database(db_name):
     sqlConnection = None
     try:
@@ -60,7 +59,6 @@ def clean_database(db_name):
     finally:
         if sqlConnection:
             sqlConnection.close()
-            print("Success and done")
         return
 
 clean_database(database)

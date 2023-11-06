@@ -103,7 +103,7 @@ def categorize_job(filename: str, job: Job, id: str):
     response = requests.get(job.url)
     if response.status_code == 200:
         with open(filename, "r") as file:
-            terms = file.read().split()
+            terms = file.read().split('\n')
         html = response.content
         soup = BeautifulSoup(html, 'html.parser')
         if id == "duuni":
@@ -118,3 +118,41 @@ def categorize_job(filename: str, job: Job, id: str):
                         result.append(word.lower())
             for item in result:
                 job.category += item + " "
+
+def open_database(db_name: str):
+    try:
+        sqlConnection = db.connect(db_name)
+    except db.Error as error:
+        print("Error while opening SQLite database: ", error)
+        return None
+    finally:
+        if sqlConnection:
+            return sqlConnection
+        return None
+
+def identify_lvl():
+    db_conn = open_database("../database/jobs.db")
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT id, title, descr FROM jobs")
+    # Fetch the id, title, description
+    records = cursor.fetchall()
+
+    for record in records:
+        record_id, title, description = record
+        lvl = ""
+
+        # Determine the value for lvl
+        if description and title:
+            if "senior" in title.lower() or "senior" in description.lower() or "kokenut" in description.lower():
+                lvl = "senior"
+            elif "junior" in title.lower() or "junior" in description.lower() or "trainee" in description.lower():
+                lvl = "junior"
+            else:
+                lvl = "unknown"
+
+        # Update the database with the new lvl value
+        cursor.execute("UPDATE jobs SET lvl = ? WHERE id = ?", (lvl, record_id))
+
+    # Commit changes and close the connection
+    db_conn.commit()
+    db_conn.close()

@@ -1,49 +1,8 @@
 import requests
 from utility_functions import *
 from bs4 import BeautifulSoup
-from classes import Job
 from url_gen import url_gen
 import sys
-import sqlite3 as db
-
-def open_database(db_name: str):
-    try:
-        sqlConnection = db.connect(db_name)
-    except db.Error as error:
-        print("Error while opening SQLite database: ", error)
-        return None
-    finally:
-        if sqlConnection:
-            return sqlConnection
-        return None
-
-def identify_lvl():
-    db_conn = open_database("../database/jobs.db")
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT id, title, descr FROM jobs")
-    # Fetch the id, title, description
-    records = cursor.fetchall()
-
-    for record in records:
-        record_id, title, description = record
-        lvl = ""
-
-        # Determine the value for lvl
-        if description and title:
-            if "senior" in title.lower() or "senior" in description.lower() or "kokenut" in description.lower():
-                lvl = "senior"
-            elif "junior" in title.lower() or "junior" in description.lower() or "trainee" in description.lower():
-                lvl = "junior"
-            else:
-                lvl = "unknown"
-
-        # Update the database with the new lvl value
-        cursor.execute("UPDATE jobs SET lvl = ? WHERE id = ?", (lvl, record_id))
-
-    # Commit changes and close the connection
-    db_conn.commit()
-    db_conn.close()
-
 
 def duunitori_crawler():
     base_url = 'https://duunitori.fi'
