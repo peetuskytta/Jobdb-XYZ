@@ -2,8 +2,6 @@ import sqlite3 as db
 from bs4 import BeautifulSoup
 import requests
 
-database = "../database/jobs.db"
-
 # TEST THIS LINK FOR EXAMPLE:
 # https://duunitori.fi/tyopaikat/tyo/senior-java-developer-relocation-to-switzerland-scsom-14504783
 
