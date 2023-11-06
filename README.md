@@ -25,7 +25,10 @@ Steps we took with the server:
 - Python
     - Flask framework
     - SQLite
+        - SQL commands in CLI and SQL queries in Python
 - Oracle Cloud Infrastructure
+    - IAM
+    - 
 - Linux
     - Apache webserver setup
     - WSGI
@@ -38,16 +41,18 @@ Steps we took with the server:
 ## To-Do
 
 - ~~automation for cleaning the database of old job postings.~~
-- simplify the code for easier expansion (ongoing)
-- expand crawling to other websites (requires the item above).
-- a way to filter intern, junior, senior positions
+- ~~simplify the code for easier expansion (ongoing)~~
+- ~~expand crawling to other websites (requires the item above).~~
+- ~~a way to filter intern, junior, senior positions~~
     - ~~requires new SQL database COLUMN~~
 - start using https instead of http
     - requires a domain name (when using Let's Cert Certbot)
 - ~~database backup and recovery~~
 - ~~design simple and more modern frontend~~
 - Automation for malicious requests identification from logs
+-
 
 ### Additions
 
-- Database backup script added and set on root crontab to run once a day
+- Database backup script added and set on root crontab to run once a day.
+- Cleaning of the database now happens after crawling has finished.
