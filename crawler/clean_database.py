@@ -47,7 +47,7 @@ def clean_database():
             existing_id = cursor.fetchone()
             if existing_id:
                 cursor.execute("DELETE FROM jobs WHERE id = ?", (item,))
-        cursor.execute("DELETE FROM jobs WHERE title LIKE '%C-%'")
+        cursor.execute("DELETE FROM jobs WHERE title LIKE '%C-k%'")
         sqlConnection.commit()
         cursor.close()
 
@@ -59,3 +59,5 @@ def clean_database():
         if sqlConnection:
             sqlConnection.close()
         return
+
+clean_database()
