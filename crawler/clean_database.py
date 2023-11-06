@@ -32,7 +32,7 @@ def clean_database():
             """)
         rows = cursor.fetchall()
         linksToTest = {}
-        errorCases = ["c-kort", "hoitaj", "esperi", "sairaanhoidon", "myyjiä", "myyjä", "lukkoseppä", "fashion", "sosiaali", "inside sales", "attorney", "legal", "marketing", "ecommerce manager", "sähkösuunnittelija", "projektipäälli", "luottoriskianalyytikko", "supervisor/commissioning", "talent acquisition", "doctoral research", "treasury"]
+        errorCases = ["c-kort", "hoitaj", "esperi", "sairaanhoidon", "myyjiä", "myynti", "myyjä", "lukkoseppä", "fashion", "sosiaali", "inside sales", "attorney", "legal", "marketing", "ecommerce manager", "sähkösuunnittelija", "projektipäälli", "luottoriskianalyytikko", "supervisor/commissioning", "talent acquisition", "doctoral research", "treasury"]
         for row in rows:
             link_val, id_val, title, category = row
             if row[2].lower() in errorCases:
@@ -48,6 +48,7 @@ def clean_database():
             if existing_id:
                 cursor.execute("DELETE FROM jobs WHERE id = ?", (item,))
         cursor.execute("DELETE FROM jobs WHERE title LIKE '%C-k%'")
+        cursor.execute("DELETE FROM jobs WHERE title LIKE '%C-l%'")
         sqlConnection.commit()
         cursor.close()
 
@@ -60,4 +61,5 @@ def clean_database():
             sqlConnection.close()
         return
 
-clean_database()
+# if you want to run this separately
+#clean_database()
