@@ -9,6 +9,7 @@ def checkForOld(links: dict) -> list:
     toDelete = [] # Store the ID to be removed from Database
     for key, value in links.items():
         #print(key)  # Print the key (ID) for debugging
+        #way to distinguish between jobs from different websites (jobly not supported yet)
         if value == "ERROR":
             toDelete.append(key)
         else:
@@ -37,7 +38,7 @@ def clean_database():
             link_val, id_val, title, category = row
             if row[2].lower() in errorCases:
                 linksToTest[id_val] = "ERROR"
-            if row[3] == "c on r ":
+            if row[3] == "c on r" or row[3] == "go":
                 linksToTest[id_val] = "ERROR"
             else:
                 linksToTest[id_val] = link_val
@@ -47,8 +48,8 @@ def clean_database():
             existing_id = cursor.fetchone()
             if existing_id:
                 cursor.execute("DELETE FROM jobs WHERE id = ?", (item,))
-        cursor.execute("DELETE FROM jobs WHERE title LIKE '%C-k%'")
-        cursor.execute("DELETE FROM jobs WHERE title LIKE '%C-l%'")
+        cursor.execute("DELETE FROM jobs WHERE title LIKE '%C-kor%'")
+        cursor.execute("DELETE FROM jobs WHERE title LIKE '%C-l %'")
         sqlConnection.commit()
         cursor.close()
 
@@ -62,4 +63,4 @@ def clean_database():
         return
 
 # if you want to run this separately
-#clean_database()
+clean_database()

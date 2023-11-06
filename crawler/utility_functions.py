@@ -113,11 +113,12 @@ def categorize_job(filename: str, job: Job, id: str):
         if description:
             result = []
             for word in terms:
-                if word.lower() in description.lower():
+                if word in description:
                     if word.lower() not in result:
                         result.append(word.lower())
             for item in result:
                 job.category += item + " "
+            job.category.strip()
 
 def open_database(db_name: str):
     try:
