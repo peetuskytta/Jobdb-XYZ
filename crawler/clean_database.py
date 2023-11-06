@@ -63,4 +63,4 @@ def clean_database():
         return
 
 # if you want to run this separately
-clean_database()
+#clean_database()
