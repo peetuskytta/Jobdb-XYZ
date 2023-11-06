@@ -23,6 +23,7 @@ def checkForOld(links: dict) -> list:
 
 def clean_database():
     sqlConnection = None
+    print("Starting database cleaning")
     try:
         sqlConnection = db.connect("../database/jobs.db")
         cursor = sqlConnection.cursor()
