@@ -18,4 +18,3 @@ class Job:
             URL: {self.url}\n\n
             Category: {self.category}\n\n
             Level: {self.lvl}\n"""
-            HEHEHE
