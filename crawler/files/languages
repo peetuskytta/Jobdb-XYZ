@@ -23,7 +23,6 @@ CSS
 Shell
 Bash
 PowerShell
-Lua
 Dart
 Flutter
 COBOL
@@ -61,7 +60,6 @@ Node.js
 Django
 Flutter
 Linux
-Mac
 Windows
 MySQL
 PostgreSQL
@@ -85,15 +83,11 @@ GCP
 IBM Cloud
 Oracle Cloud
 OCI
-Alibaba Cloud
 DigitalOcean
 Heroku
 Salesforce
 Rackspace
 VMware Cloud
 Adobe Cloud
-CenturyLink Cloud
-Tencent Cloud
-Red Hat OpenShift
 SAP Cloud Platform
 Kubernetes
