@@ -3,8 +3,7 @@
 ##
 
 class Job:
-    def __init__(self, title, id, url, descr, category, lvl):
-        self.id = id
+    def __init__(self, title, url, descr, category, lvl):
         self.title = title
         self.url = url
         self.category = category
@@ -13,9 +12,9 @@ class Job:
 
         # This defines how the class job should be printed.
     def __str__(self):
-        return f"""ID: {self.id}\n
+        return f"""
             Job Title:{self.title}\n\n
             Description:\n{self.descr}\n\n
             URL: {self.url}\n\n
             Category: {self.category}\n\n
-            Level: {self.lvl}"""
+            Level: {self.lvl}\n"""

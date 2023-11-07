@@ -20,6 +20,7 @@ def process_keywords():
     if request.method == 'POST':
         data = request.get_json()
         keywords = data.get('keywords')
+        # SANITIZE AND VERIFY CONTENT
         keywords = keywords.split()
 
         #client_ip = request.remote_addr
