@@ -23,6 +23,7 @@ def clean_database():
         for pattern in search_patterns:
             sql = f"DELETE FROM jobs WHERE title LIKE '{pattern}'"
             cursor.execute(sql)
+            sqlConnection.commit()
 
         sqlConnection.commit()
         cursor.close()
@@ -37,7 +38,7 @@ def clean_database():
         return
 
 # if you want to run this separately remove the comment on the next line and run the script with command: 'python3 clean_database.py'
-#clean_database()
+clean_database()
 
 ### Make a separate cleaner for out of date job postings.
 ### Tricky to make work for multiple different job sites.

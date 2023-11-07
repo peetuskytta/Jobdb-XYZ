@@ -45,7 +45,7 @@ def duunitori_crawler():
         page_number += 1
 
     # Should be commented out in production as there's no GUI in VM
-    print("\nDuunitori: total pages processed: ", page_number)
+    print(f"\nDuunitori: crawl done!")
     database_inserts(duunitori_jobs)
 
 
@@ -74,5 +74,5 @@ def jobly_crawler():
             raise ConnectionError()
         finally:
             None
-            #print(f"jobly: ({word}) done!")
+    print(f"jobly: crawl done!")
     database_inserts(jobly_jobs)
