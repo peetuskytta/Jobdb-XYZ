@@ -19,10 +19,12 @@ def clean_database():
         with open("files/delete_pattern", 'r') as file:
             search_patterns = file.read().splitlines()
 
+        rowsAffected = 0
         # loop the patterns and execute sql DELETE
         for pattern in search_patterns:
             sql = f"DELETE FROM jobs WHERE title LIKE '{pattern}'"
             cursor.execute(sql)
+            rowsAffected += cursor.rowcount
             sqlConnection.commit()
 
         sqlConnection.commit()
@@ -34,11 +36,12 @@ def clean_database():
 
     finally:
         if sqlConnection:
+            print(f"Total rows deleted: {rowsAffected}")
             sqlConnection.close()
         return
 
 # if you want to run this separately remove the comment on the next line and run the script with command: 'python3 clean_database.py'
-clean_database()
+#clean_database()
 
 ### Make a separate cleaner for out of date job postings.
 ### Tricky to make work for multiple different job sites.

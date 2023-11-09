@@ -45,8 +45,9 @@ def duunitori_crawler():
         page_number += 1
 
     # Should be commented out in production as there's no GUI in VM
-    print(f"\nDuunitori: crawl done!")
     database_inserts(duunitori_jobs)
+    print(f"\nDuunitori crawl: {len(duunitori_jobs)} jobs added")
+
 
 
 ### Crawler to find the job postings in Jobly.fi website. ###
@@ -74,5 +75,5 @@ def jobly_crawler():
             raise ConnectionError()
         finally:
             None
-    print(f"jobly: crawl done!")
     database_inserts(jobly_jobs)
+    print(f"jobly crawl: {len(jobly_jobs)} jobs added")
