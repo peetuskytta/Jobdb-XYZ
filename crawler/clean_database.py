@@ -19,10 +19,13 @@ def clean_database():
         with open("files/delete_pattern", 'r') as file:
             search_patterns = file.read().splitlines()
 
+        rowsAffected = 0
         # loop the patterns and execute sql DELETE
         for pattern in search_patterns:
             sql = f"DELETE FROM jobs WHERE title LIKE '{pattern}'"
             cursor.execute(sql)
+            rowsAffected += cursor.rowcount
+            sqlConnection.commit()
 
         sqlConnection.commit()
         cursor.close()
@@ -33,6 +36,7 @@ def clean_database():
 
     finally:
         if sqlConnection:
+            print(f"Total rows deleted: {rowsAffected}")
             sqlConnection.close()
         return
 
