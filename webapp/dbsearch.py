@@ -14,7 +14,7 @@ def open_database(db_name: str):
 def search_database(sql_connection, words: list):
     cursor = sql_connection.cursor()
     cursor.execute("SELECT title, category, link, lvl FROM jobs")
-    # Fetch all the titles, category and link
+    # Fetch all the titles, category, link, and lvl (lvl to be used later in frontend to select junior or senior)
     titles = cursor.fetchall()
     jobs = []
     for item in titles:
