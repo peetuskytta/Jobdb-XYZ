@@ -46,3 +46,40 @@ def clean_database():
 ### Make a separate cleaner for out of date job postings.
 ### Tricky to make work for multiple different job sites.
 ### Consider deleting any posting that has been in database for more than a month.
+
+def shouldDeleteRow(row):
+    #checks
+    return False
+
+def cleanOldFromDatabase():
+    sqlConnection = None
+    print("Starting database cleaning: deleting old job postings")
+    try:
+        sqlConnection = db.connect("../database/jobs.db")
+        cursor = sqlConnection.cursor()
+
+        rowsAffected = 0
+        # loop the URLs and execute sql DELETE
+
+        cursor.execute(f"SELECT id, link FROM jobs")
+        rows = cursor.fetchall()
+
+        for row in rows:
+            if shouldDeleteRow(row[1]):
+                row_id = row[0]
+                cursor.execute(f"DELETE FROM jobs WHERE id=?", (row_id,))
+                rowsAffected += cursor.rowcount
+                sqlConnection.commit()
+
+        sqlConnection.commit()
+        cursor.close()
+
+    except db.Error as error:
+        print("Error connecting to SQLite database while checking for old links: ", error)
+        return
+
+    finally:
+        if sqlConnection:
+            print(f"Total old links deleted: {rowsAffected}")
+            sqlConnection.close()
+        return
