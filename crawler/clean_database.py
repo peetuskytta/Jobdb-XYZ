@@ -1,6 +1,7 @@
 import sqlite3 as db
 from bs4 import BeautifulSoup
 import requests
+from fuzzywuzzy import fuzz # Used for text similarity comparisons
 
 # TEST THIS LINK FOR EXAMPLE:
 # https://duunitori.fi/tyopaikat/tyo/senior-java-developer-relocation-to-switzerland-scsom-14504783
@@ -40,12 +41,8 @@ def clean_database():
             sqlConnection.close()
         return
 
-# if you want to run this separately remove the comment on the next line and run the script with command: 'python3 clean_database.py'
-#clean_database()
 
-### Make a separate cleaner for out of date job postings.
-### Tricky to make work for multiple different job sites.
-### Consider deleting any posting that has been in database for more than a month.
+### Make a cleaner for duplicates compare titles and if they match compare descriptions and if 90% match remove. Use diff?
 
 def shouldDeleteRow(row):
     #checks
@@ -57,10 +54,7 @@ def cleanOldFromDatabase():
     try:
         sqlConnection = db.connect("../database/jobs.db")
         cursor = sqlConnection.cursor()
-
         rowsAffected = 0
-        # loop the URLs and execute sql DELETE
-
         cursor.execute(f"SELECT id, link FROM jobs")
         rows = cursor.fetchall()
 
@@ -83,3 +77,7 @@ def cleanOldFromDatabase():
             print(f"Total old links deleted: {rowsAffected}")
             sqlConnection.close()
         return
+
+
+# if you want to run this separately remove the comment on the next line and run the script with command: 'python3 clean_database.py'
+#clean_database()
