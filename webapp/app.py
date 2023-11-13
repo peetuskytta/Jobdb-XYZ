@@ -37,9 +37,5 @@ def contacts():
     # Renders the "contacts.html" template when About link is clicked
     return render_template('contacts.html')
 
-@app.route('/article')
-def article():
-    return render_template('article.html')
-
 if __name__ == '__main__':
     app.run(debug=True)
