@@ -52,11 +52,11 @@ def shouldDeleteRow(link):
         soup = BeautifulSoup(html, 'html.parser')
         if "jobly" in link:
             if "Tämä työpaikkailmoitus ei ole enää voimassa" in soup.text:
-                print(link, "FOUND")
+                #print(link, "FOUND")
                 return True
         elif "duunitori" in link:
             if "Pahoittelut, haku tähän avoimeen" in soup.text:
-                print(link, "FOUND")
+                #print(link, "FOUND")
                 return True
     return False
 

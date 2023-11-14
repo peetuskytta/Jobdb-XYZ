@@ -14,5 +14,5 @@ jobly_crawler()
 #academicwork_crawler()
 identify_lvl()
 clean_database() # cleans the "not wanted" items from the database
-#cleanOldFromDatabase() # clean the old links from the database
+cleanOldFromDatabase() # clean the old links from the database
 #
