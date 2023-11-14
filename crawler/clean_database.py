@@ -44,8 +44,20 @@ def clean_database():
 
 ### Make a cleaner for duplicates compare titles and if they match compare descriptions and if 90% match remove. Use diff?
 
-def shouldDeleteRow(row):
+def shouldDeleteRow(link):
     #checks
+    response =  requests.get(link)
+    if response.status_code == 200:
+        html = response.content
+        soup = BeautifulSoup(html, 'html.parser')
+        if "jobly" in link:
+            if "Tämä työpaikkailmoitus ei ole enää voimassa" in soup.text:
+                print(link, "FOUND")
+                return True
+        elif "duunitori" in link:
+            if "Pahoittelut, haku tähän avoimeen" in soup.text:
+                print(link, "FOUND")
+                return True
     return False
 
 def cleanOldFromDatabase():
@@ -79,5 +91,6 @@ def cleanOldFromDatabase():
         return
 
 
-# if you want to run this separately remove the comment on the next line and run the script with command: 'python3 clean_database.py'
+# if you want to run these separately remove the comments on the next lines and run the script with command: 'python3 clean_database.py'
 #clean_database()
+#cleanOldFromDatabase()
