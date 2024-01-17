@@ -1,5 +1,5 @@
 import requests
-from utility_functions import *
+from utility_functions import categorize_job, save_job, database_inserts
 from bs4 import BeautifulSoup
 from url_gen import url_gen
 import sys

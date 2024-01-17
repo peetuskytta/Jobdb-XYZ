@@ -1,7 +1,7 @@
 import sqlite3 as db
 from bs4 import BeautifulSoup
 import requests
-from fuzzywuzzy import fuzz # Used for text similarity comparisons
+#from fuzzywuzzy import fuzz # Used for text similarity comparisons
 
 # TEST THIS LINK FOR EXAMPLE:
 # https://duunitori.fi/tyopaikat/tyo/senior-java-developer-relocation-to-switzerland-scsom-14504783
@@ -41,7 +41,7 @@ def clean_database():
             sqlConnection.close()
         return
 
-
+#https://youtu.be/ooOELrGMn14?t=10
 ### Make a cleaner for duplicates compare titles and if they match compare descriptions and if 90% match remove. Use diff?
 
 def shouldDeleteRow(link):

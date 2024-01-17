@@ -32,10 +32,14 @@ def process_keywords():
             results = search_database(db_name, keywords)
             return jsonify(results)
 
-@app.route('/contacts.html')
+@app.route('/contacts')
 def contacts():
     # Renders the "contacts.html" template when About link is clicked
     return render_template('contacts.html')
+
+@app.route('/whyareugay')
+def whyareyougay():
+    return (render_template('whyareu.html'))
 
 if __name__ == '__main__':
     app.run(debug=True)
