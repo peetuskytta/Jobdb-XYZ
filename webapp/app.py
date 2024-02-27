@@ -15,7 +15,6 @@ def index():
     return render_template('index.html')
 
 @app.route('/process_keywords', methods=['POST'])
-
 def process_keywords():
     if request.method == 'POST':
         data = request.get_json()
@@ -33,6 +32,7 @@ def process_keywords():
             return jsonify(results)
 
 @app.route('/contacts')
+
 def contacts():
     # Renders the "contacts.html" template when About link is clicked
     return render_template('contacts.html')
@@ -40,6 +40,16 @@ def contacts():
 @app.route('/whyareugay')
 def whyareyougay():
     return (render_template('whyareu.html'))
+
+@app.route('/jobs', methods=['GET'])
+def jobs():
+    if request.method == 'GET':
+        db_name = open_database("../database/jobs.db")
+        if db_name != None:
+            apiReturn = api_jobs(db_name)
+            return jsonify(apiReturn)
+    else:
+        return "invalid request"
 
 if __name__ == '__main__':
     app.run(debug=True)

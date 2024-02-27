@@ -11,10 +11,11 @@ def open_database(db_name: str):
             return sqlConnection
         return None
 
-def search_database(sql_connection, words: list):
+def search_database(sql_connection, words: list) -> list:
     cursor = sql_connection.cursor()
     cursor.execute("SELECT title, category, link, lvl FROM jobs")
-    # Fetch all the titles, category, link, and lvl (lvl to be used later in frontend to select junior or senior)
+    # Fetch all the titles, category, link, and lvl (lvl to be used later
+    # in frontend to select junior or senior)
     titles = cursor.fetchall()
     jobs = []
     for item in titles:
@@ -28,3 +29,15 @@ def search_database(sql_connection, words: list):
     sql_connection.close()
     return jobs
 
+def api_jobs(sql_connection) -> list:
+    # get title, link, lvl FROM jobs
+    jobs = []
+    cursor = sql_connection.cursor()
+    cursor.execute("SELECT title, link, lvl FROM jobs")
+    titles = cursor.fetchall()
+    for item in titles:
+        jobs.append({"title": item[0], "link": item[1], "lvl": item[2]})
+    # Close the cursor and return the results
+    cursor.close()
+    sql_connection.close()
+    return jobs
