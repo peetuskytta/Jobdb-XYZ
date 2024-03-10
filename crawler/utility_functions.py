@@ -81,7 +81,7 @@ def testAndActConnection(db_name: str, jobs_list: list):
         if sqlConnection:
             # close the connection to the database
             sqlConnection.close()
-            print("Closing successful.")
+            # print("Closing successful.")
             return True
         else:
             return False
@@ -146,7 +146,7 @@ def identify_lvl():
         if description and title:
             if "senior" in title.lower() or "senior" in description.lower() or "kokenut" in description.lower():
                 lvl = "senior"
-            elif "junior" in title.lower() or "junior" in description.lower() or "trainee" in description.lower():
+            elif "junior" in title.lower() or "junior" in description.lower() or "trainee" in description.lower() or "harjoittelija" in description.lower():
                 lvl = "junior"
             else:
                 lvl = "unknown"
