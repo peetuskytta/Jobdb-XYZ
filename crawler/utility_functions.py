@@ -3,6 +3,7 @@ from classes import Job
 from bs4 import BeautifulSoup
 import requests
 import json
+from datetime import datetime
 
 def save_job(data, url: str, id: str):
     if id == "duuni":
@@ -55,7 +56,8 @@ def testAndActConnection(db_name: str, jobs_list: list):
                 link TEXT,
                 descr TEXT,
                 category TEXT,
-                lvl TEXT
+                lvl TEXT,
+                date DATE
             )
         """)
 
@@ -66,8 +68,8 @@ def testAndActConnection(db_name: str, jobs_list: list):
         for job in jobs_list:
             # Check if the job link is already in the database
             if job.url not in existing_links:
-                query = "INSERT INTO jobs (title, link, descr, category, lvl) VALUES (?, ?, ?, ?, ?)"
-                values = (job.title, job.url, job.descr, job.category, job.lvl)
+                query = "INSERT INTO jobs (title, link, descr, category, lvl, date) VALUES (?, ?, ?, ?, ?, ?)"
+                values = (job.title, job.url, job.descr, job.category, job.lvl, datetime.now().date())
                 cursor.execute(query, values)
                 sqlConnection.commit()
                 existing_links.add(job.url)  # Add the new link to the set of existing links
