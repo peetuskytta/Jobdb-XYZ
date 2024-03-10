@@ -1,4 +1,5 @@
 import sqlite3 as db
+from datetime import datetime
 
 def open_database(db_name: str):
     try:
@@ -36,10 +37,11 @@ def api_jobs(sql_connection) -> list:
     # get title, link, lvl FROM jobs
     jobs = []
     cursor = sql_connection.cursor()
-    cursor.execute("SELECT title, link, lvl FROM jobs")
-    titles = cursor.fetchall()
-    for item in titles:
-        jobs.append({"title": item[0], "link": item[1], "lvl": item[2]})
+    today_date = datetime.now().date()
+    cursor.execute("SELECT title, link, lvl, date FROM jobs WHERE date = ?", (today_date,))
+    records_with_today_date = cursor.fetchall()
+    for item in records_with_today_date:
+        jobs.append({"title": item[0], "link": item[1], "lvl": item[2], "date": item[3]})
     # Close the cursor and return the results
     cursor.close()
     sql_connection.close()
