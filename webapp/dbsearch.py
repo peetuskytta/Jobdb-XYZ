@@ -13,7 +13,7 @@ def open_database(db_name: str):
 
 def search_database(sql_connection, words: list) -> list:
     cursor = sql_connection.cursor()
-    cursor.execute("SELECT title, category, link, lvl FROM jobs")
+    cursor.execute("SELECT title, category, link, lvl, date FROM jobs")
     # Fetch all the titles, category, link, and lvl (lvl to be used later
     # in frontend to select junior or senior)
     titles = cursor.fetchall()
@@ -22,8 +22,11 @@ def search_database(sql_connection, words: list) -> list:
         categories = item[1].split(' ')
         for keyword in words:
             if keyword.lower() in categories:
-                jobs.append({"name": item[0], "link": item[2], "lvl": item[3]})
+                jobs.append({"name": item[0], "link": item[2], "lvl": item[3], "date": item[4]})
                 break
+        if keyword.lower() == "c":
+            jobs.append({"name": item[0], "link": item[2], "lvl": item[3], "date": item[4]})
+
     # Close the cursor and return the results
     cursor.close()
     sql_connection.close()
