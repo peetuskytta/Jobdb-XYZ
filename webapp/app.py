@@ -37,10 +37,6 @@ def contacts():
     # Renders the "contacts.html" template when About link is clicked
     return render_template('contacts.html')
 
-""" This was added for a malicious actor to find what he/she/they were after """
-@app.route('/whyareugay')
-def whyareyougay():
-    return (render_template('whyareu.html'))
 
 @app.route('/jobs', methods=['GET'])
 def jobs():

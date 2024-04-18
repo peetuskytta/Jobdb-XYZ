@@ -9,4 +9,4 @@ __pycache__/
 database/jobs.db
 files/peetu.notes
 app.log
-whyareu.html
+*.sh
