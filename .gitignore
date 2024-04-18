@@ -1,7 +1,6 @@
 venv/
 myenv/
 test
-*.txt
 files/sqlite.notes
 scraperenv/
 __pycache__/
