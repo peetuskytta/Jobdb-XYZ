@@ -6,7 +6,7 @@ A Python web crawler / web app to search the database for IT job postings.
 ### What does it do?
 - crawls through a job listing website in search for job postings for software developer roles.
 - it is run once a day and it updates SQLite database with new listings it finds.
-- database is accessible via web app at ip: `129.151.211.126`, link --> [JobDatabase](http://129.151.211.126/)
+- database is accessible via web app at --> www.jobdb.xyz
 
 ### Deployment
 - Deployed on a Oracle Cloud running Oracle Linux 8.8.
