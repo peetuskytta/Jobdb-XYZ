@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from dbsearch import *
 import logging
-import datetime
 
 app = Flask(__name__)
 log_file = 'app.log'
