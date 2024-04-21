@@ -1,17 +1,19 @@
 import sqlite3 as db
 from bs4 import BeautifulSoup
 import requests
+import logging
 #from fuzzywuzzy import fuzz # Used for text similarity comparisons
 
 # TEST THIS LINK FOR EXAMPLE:
 # https://duunitori.fi/tyopaikat/tyo/senior-java-developer-relocation-to-switzerland-scsom-14504783
 
+logging.basicConfig(filename='report.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 ### This function will load delete_pattern file content from files folder to search_patterns
 ### variable (list) which is used to delete specific patterns not wanted in the database.
 def clean_database():
     sqlConnection = None
-    print("Starting database cleaning based on patterns")
+    #print("Starting database cleaning based on patterns")
     try:
         sqlConnection = db.connect("../database/jobs.db")
         cursor = sqlConnection.cursor()
@@ -33,11 +35,13 @@ def clean_database():
 
     except db.Error as error:
         print("Error connecting to SQLite database while cleaning: ", error)
+        logging.error('Error: ', error)
         return
 
     finally:
         if sqlConnection:
             print(f"Total rows deleted: {rowsAffected}")
+            logging.info('Total rows deleted: %s', rowsAffected)
             sqlConnection.close()
         return
 
@@ -63,6 +67,7 @@ def shouldDeleteRow(link):
 def cleanOldFromDatabase():
     sqlConnection = None
     print("Starting database cleaning: deleting old job postings")
+    logging.info('Deleting old job postings')
     try:
         sqlConnection = db.connect("../database/jobs.db")
         cursor = sqlConnection.cursor()
@@ -82,11 +87,13 @@ def cleanOldFromDatabase():
 
     except db.Error as error:
         print("Error connecting to SQLite database while checking for old links: ", error)
+        logging.error('Error: %s', error)
         return
 
     finally:
         if sqlConnection:
             print(f"Total old links deleted: {rowsAffected}")
+            logging.info('Links deleted: %s', rowsAffected)
             sqlConnection.close()
         return
 
