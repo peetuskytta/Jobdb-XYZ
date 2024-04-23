@@ -16,7 +16,7 @@ jobly_crawler()
 #hub_crawler()
 #academicwork_crawler()
 identify_lvl()
-logging.info('Crawling DONE\n---------------------------------------------------')
 clean_database() # cleans the "not wanted" items from the database
 cleanOldFromDatabase() # clean the old links from the database
+logging.info('Crawling and Cleaning DONE\n---------------------------------------------------')
 #

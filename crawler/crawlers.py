@@ -2,7 +2,7 @@ import requests
 from utility_functions import categorize_job, save_job, database_inserts
 from bs4 import BeautifulSoup
 from url_gen import url_gen
-import sys
+
 
 def duunitori_crawler():
     base_url = 'https://duunitori.fi'
@@ -67,13 +67,13 @@ def jobly_crawler():
                 soup = BeautifulSoup(html, 'html.parser')
                 job_grid = soup.find_all('a', class_='recruiter-job-link')
                 for div in job_grid:
-                    job = save_job(div, None, "jobly")
+                    job = save_job(div, "", "jobly")
                     if job:
                         categorize_job("files/languages", job, "jobly")
                         jobly_jobs.append(job)
         except:
             raise ConnectionError()
         finally:
-            None
+            pass
     database_inserts(jobly_jobs)
     # print(f"jobly crawl: {len(jobly_jobs)} jobs added")
