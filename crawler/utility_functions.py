@@ -146,9 +146,9 @@ def identify_lvl():
 
         # Determine the value for lvl
         if description and title:
-            if "senior" in title.lower() or "senior" in description.lower() or "kokenut" in description.lower() or "architect" in description.lower() or "architect" in title.lower():
+            if "senior" in title.lower() or "senior" in description.lower() or "kokenut" in description.lower() or "architect" in title.lower():
                 lvl = "senior"
-            elif "junior" in title.lower() or "junior" in description.lower() or "trainee" in description.lower() or "harjoittelija" in description.lower():
+            elif "junior" in title.lower() or "junior" in description.lower() or "trainee" in description.lower() or "harjoittelija" in description.lower() or "intern" in title.lower():
                 lvl = "junior"
             else:
                 lvl = "unknown"
