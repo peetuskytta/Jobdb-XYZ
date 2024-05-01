@@ -64,6 +64,17 @@ def shouldDeleteRow(link):
                 return True
     return False
 
+def deleteRowsWithEmptyCategory(cursor):
+    cursor.execute("SELECT id FROM jobs WHERE category IS NULL OR category = ''")
+    logging.info('Deleting empty category rows')
+    rows = cursor.fetchall()
+    rowsAffected = 0
+    for row in rows:
+        row_id = row[0]
+        cursor.execute("DELETE FROM jobs WHERE id=?", (row_id,))
+        rowsAffected += cursor.rowcount
+    return rowsAffected
+
 def cleanOldFromDatabase():
     sqlConnection = None
     print("Starting database cleaning: deleting old job postings")
@@ -71,7 +82,7 @@ def cleanOldFromDatabase():
     try:
         sqlConnection = db.connect("../database/jobs.db")
         cursor = sqlConnection.cursor()
-        rowsAffected = 0
+        rowsAffected = deleteRowsWithEmptyCategory(cursor)
         cursor.execute(f"SELECT id, link FROM jobs")
         rows = cursor.fetchall()
 
