@@ -30,7 +30,6 @@ Fortran
 Lisp
 Scheme
 Prolog
-Assembly Language
 Assembly
 VHDL
 Ada
@@ -65,29 +64,21 @@ MySQL
 PostgreSQL
 SQLite
 MongoDB
-Oracle Database
-Microsoft SQL Server
 MariaDB
 Redis
 Cassandra
 Couchbase
-Amazon DynamoDB
-Firebase Realtime Database
 Neo4j
 Elasticsearch
-Amazon Web Services
 AWS
 Azure
-Google Cloud Platform
 GCP
-IBM Cloud
-Oracle Cloud
+Oracle
 OCI
 DigitalOcean
 Heroku
 Salesforce
 Rackspace
-VMware Cloud
-Adobe Cloud
-SAP Cloud Platform
+VMware
+SAP
 Kubernetes
