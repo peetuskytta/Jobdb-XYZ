@@ -47,7 +47,7 @@ def jobs():
     else:
         return "invalid request"
 
-@app.route('/jobs-jr', methods=['GET'])
+@app.route('/jr', methods=['GET'])
 def jobs_jr():
     if request.method == 'GET':
         db_name = open_database("../database/jobs.db")
@@ -57,7 +57,7 @@ def jobs_jr():
     else:
         return "invalid request"
 
-@app.route('/jobs-sr', methods=['GET'])
+@app.route('/sr', methods=['GET'])
 def jobs_sr():
     if request.method == 'GET':
         db_name = open_database("../database/jobs.db")
