@@ -3,6 +3,7 @@ from classes import Job
 from bs4 import BeautifulSoup
 import requests
 import json
+import logging
 from datetime import datetime
 
 def save_job(data, url: str, id: str):
@@ -47,7 +48,6 @@ def testAndActConnection(db_name: str, jobs_list: list):
     sqlConnection = None
     try:
         sqlConnection = db.connect(db_name)
-        print("Connection to database was successful. Initiating the data insertion...")
         cursor = sqlConnection.cursor()
         cursor.execute("""
                 CREATE TABLE IF NOT EXISTS jobs (
@@ -76,14 +76,13 @@ def testAndActConnection(db_name: str, jobs_list: list):
         sqlConnection.commit()
 
     except db.Error as error:
-        print("Error while connecting to SQLite database: ", error)
+        logging.error('Error: %s', error)
         return False
 
     finally:
         if sqlConnection:
             # close the connection to the database
             sqlConnection.close()
-            # print("Closing successful.")
             return True
         else:
             return False
@@ -126,7 +125,7 @@ def open_database(db_name: str):
     try:
         sqlConnection = db.connect(db_name)
     except db.Error as error:
-        print("Error while opening SQLite database: ", error)
+        logging.error('Error: %s', error)
         return None
     finally:
         if sqlConnection:

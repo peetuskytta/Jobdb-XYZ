@@ -47,5 +47,25 @@ def jobs():
     else:
         return "invalid request"
 
+@app.route('/jobs-jr', methods=['GET'])
+def jobs_jr():
+    if request.method == 'GET':
+        db_name = open_database("../database/jobs.db")
+        if db_name != None:
+            apiReturn = api_jobs_jr(db_name)
+            return jsonify(apiReturn)
+    else:
+        return "invalid request"
+
+@app.route('/jobs-sr', methods=['GET'])
+def jobs_sr():
+    if request.method == 'GET':
+        db_name = open_database("../database/jobs.db")
+        if db_name != None:
+            apiReturn = api_jobs_sr(db_name)
+            return jsonify(apiReturn)
+    else:
+        return "invalid request"
+
 if __name__ == '__main__':
     app.run(debug=True)

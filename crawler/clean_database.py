@@ -13,7 +13,6 @@ logging.basicConfig(filename='report.log', level=logging.INFO, format='%(asctime
 ### variable (list) which is used to delete specific patterns not wanted in the database.
 def clean_database():
     sqlConnection = None
-    #print("Starting database cleaning based on patterns")
     try:
         sqlConnection = db.connect("../database/jobs.db")
         cursor = sqlConnection.cursor()
@@ -34,13 +33,11 @@ def clean_database():
         cursor.close()
 
     except db.Error as error:
-        print("Error connecting to SQLite database while cleaning: ", error)
         logging.error('Error: ', error)
         return
 
     finally:
         if sqlConnection:
-            print(f"Total rows deleted: {rowsAffected}")
             logging.info('Total rows deleted: %s', rowsAffected)
             sqlConnection.close()
         return
@@ -56,11 +53,9 @@ def shouldDeleteRow(link):
         soup = BeautifulSoup(html, 'html.parser')
         if "jobly" in link:
             if "Tämä työpaikkailmoitus ei ole enää voimassa" in soup.text:
-                #print(link, "FOUND")
                 return True
         elif "duunitori" in link:
             if "Pahoittelut, haku tähän avoimeen" in soup.text:
-                #print(link, "FOUND")
                 return True
     return False
 
@@ -77,7 +72,6 @@ def deleteRowsWithEmptyCategory(cursor):
 
 def cleanOldFromDatabase():
     sqlConnection = None
-    print("Starting database cleaning: deleting old job postings")
     logging.info('Deleting old job postings')
     try:
         sqlConnection = db.connect("../database/jobs.db")
@@ -97,14 +91,12 @@ def cleanOldFromDatabase():
         cursor.close()
 
     except db.Error as error:
-        print("Error connecting to SQLite database while checking for old links: ", error)
         logging.error('Error: %s', error)
         return
 
     finally:
         if sqlConnection:
-            print(f"Total old links deleted: {rowsAffected}")
-            logging.info('Links deleted: %s', rowsAffected)
+            logging.info('Total links deleted: %s', rowsAffected)
             sqlConnection.close()
         return
 

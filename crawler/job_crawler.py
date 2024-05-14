@@ -11,12 +11,14 @@ from utility_functions import identify_lvl
 
 
 logging.basicConfig(filename='report.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.info('Starting to crawl job sites\n')
 duunitori_crawler()
 jobly_crawler()
 #hub_crawler()
 #academicwork_crawler()
 identify_lvl()
+logging.info('Crawling DONE\nStarting to clean the database\n')
 clean_database() # cleans the "not wanted" items from the database
 cleanOldFromDatabase() # clean the old links from the database
-logging.info('Crawling and Cleaning DONE\n---------------------------------------------------')
+logging.info('Cleaning DONE\n---------------------------------------------------')
 #

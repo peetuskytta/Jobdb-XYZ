@@ -36,19 +36,12 @@ def duunitori_crawler():
                 raise ConnectionError("Under maintenance")
             if response.status_code == 404:
                 page_found = False
-            # print(f"Response status: {response.status_code}")
-
-        # Should be commented out in production as there's no GUI in VM.
-        #sys.stdout.flush()
-        #sys.stdout.write("\rNumber of pages processed: %d" % page_number)
 
         response = None
         page_number += 1
 
     # Should be commented out in production as there's no GUI in VM
     database_inserts(duunitori_jobs)
-    print(f"\nDuunitori crawl: {len(duunitori_jobs)}")
-
 
 ### Crawler to find the job postings in Jobly.fi website. ###
 def jobly_crawler():
@@ -76,4 +69,3 @@ def jobly_crawler():
         finally:
             pass
     database_inserts(jobly_jobs)
-    # print(f"jobly crawl: {len(jobly_jobs)} jobs added")
