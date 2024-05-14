@@ -48,12 +48,11 @@ def api_jobs(sql_connection) -> list:
     sql_connection.close()
     return jobs
 
-
 def api_jobs_jr(sql_connection) -> list:
-    # get title, link, lvl FROM jobs WHERE lvl = 'junior'
+    # get title, link, lvl FROM jobs WHERE lvl = 'junior' ORDER BY date DESC
     jobs = []
     cursor = sql_connection.cursor()
-    cursor.execute("SELECT title, link, lvl, date FROM jobs WHERE lvl = 'junior'")
+    cursor.execute("SELECT title, link, lvl, date FROM jobs WHERE lvl = 'junior' ORDER BY date DESC")
     records = cursor.fetchall()
     for item in records:
         jobs.append({"title": item[0], "link": item[1], "lvl": item[2], "date": item[3]})
@@ -63,10 +62,10 @@ def api_jobs_jr(sql_connection) -> list:
     return jobs
 
 def api_jobs_sr(sql_connection) -> list:
-    # get title, link, lvl FROM jobs WHERE lvl = 'senior'
+    # get title, link, lvl FROM jobs WHERE lvl = 'senior' ORDER BY date DESC
     jobs = []
     cursor = sql_connection.cursor()
-    cursor.execute("SELECT title, link, lvl, date FROM jobs WHERE lvl = 'senior'")
+    cursor.execute("SELECT title, link, lvl, date FROM jobs WHERE lvl = 'senior' ORDER BY date DESC")
     records = cursor.fetchall()
     for item in records:
         jobs.append({"title": item[0], "link": item[1], "lvl": item[2], "date": item[3]})
