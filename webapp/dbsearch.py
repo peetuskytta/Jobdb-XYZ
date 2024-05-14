@@ -73,3 +73,16 @@ def api_jobs_sr(sql_connection) -> list:
     cursor.close()
     sql_connection.close()
     return jobs
+
+def api_jobs_uk(sql_connection) -> list:
+    # get title, link, lvl FROM jobs WHERE lvl = 'unknown' ORDER BY date DESC
+    jobs = []
+    cursor = sql_connection.cursor()
+    cursor.execute("SELECT title, link, lvl, date FROM jobs WHERE lvl = 'unknown' ORDER BY date DESC")
+    records = cursor.fetchall()
+    for item in records:
+        jobs.append({"title": item[0], "link": item[1], "lvl": item[2], "date": item[3]})
+    # Close the cursor and return the results
+    cursor.close()
+    sql_connection.close()
+    return jobs

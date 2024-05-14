@@ -67,5 +67,15 @@ def senior():
     else:
         return "invalid request"
 
+@app.route('/unknown', methods=['GET'])
+def unknown():
+    if request.method == 'GET':
+        db_name = open_database("../database/jobs.db")
+        if db_name != None:
+            apiReturn = api_jobs_sr(db_name)
+            return jsonify(apiReturn)
+    else:
+        return "invalid request"
+
 if __name__ == '__main__':
     app.run(debug=True)
