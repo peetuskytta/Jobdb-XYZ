@@ -38,49 +38,43 @@
             </div>
         </form>
 
-            <div id="filterButtons" style="display: none;">
-                <!-- <button class="btn btn-primary" id="filterAll">Show All</button>
-                <button class="btn btn-primary" id="filterPython">Python</button> -->
-            </div>
+        <!-- Display container for the returned data -->
+        <div id="result-container"></div>
 
-            <!-- Display container for the returned data -->
-            <div id="result-container"></div>
+        <script>
+            // Function to display the returned data
+            function displayKeywords(keywords) {
+                const resultContainer = document.getElementById('result-container');
 
-            <script>
-                // Function to display the returned data
-                function displayKeywords(keywords) {
-                    const resultContainer = document.getElementById('result-container');
-
-                    if (!keywords || keywords.length === 0) {
-                        resultContainer.innerHTML = `<p><br>No keywords found.</p><br>`;
-                        return;
-                    }
-
-                    const formattedKeywords = keywords.map((keyword) => {
-                        return `<a href="${keyword.link}" target="_blank" class="visited-link">${keyword.name}</a><br>`;
-                    });
-
-                    const resultHTML = `<p><br>Job Listings that match at least one of the keywords:<br><br>${formattedKeywords.join('')}</p>`;
-
-                    resultContainer.innerHTML = resultHTML;
+                if (!keywords || keywords.length === 0) {
+                    resultContainer.innerHTML = `<p><br>No keywords found.</p><br>`;
+                    return;
                 }
 
-                document.querySelector('#searchForm').addEventListener('submit', function (event) {
-                    event.preventDefault();
+                const formattedKeywords = keywords.map((keyword) => {
+                    return `<a href="${keyword.link}" target="_blank" class="visited-link">${keyword.name}</a><br>`;
+                });
 
-                    const keywords = document.getElementById('keywords').value;
+                const resultHTML = `<p><br>Jobs that match your search:<br><br>${formattedKeywords.join('')}</p>`;
 
-                    fetch('/process_keywords', {
-                        method: 'POST',
-                        body: JSON.stringify({ keywords }),
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
+                resultContainer.innerHTML = resultHTML;
+            }
+
+            document.querySelector('#searchForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const keywords = document.getElementById('keywords').value;
+
+                fetch('/process_keywords', {
+                    method: 'POST',
+                    body: JSON.stringify({ keywords }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
                     .then((response) => response.json())
                     .then((data) => {
                         if (data) {
-                            document.getElementById('filterButtons').style.display = 'block';
                             displayKeywords(data);
                         } else {
                             console.error('No data received from the server.');
@@ -89,9 +83,9 @@
                     .catch((error) => {
                         console.error('Error:', error);
                     });
-                });
+            });
 
-            </script>
+        </script>
 
 
     </div>
