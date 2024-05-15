@@ -67,8 +67,8 @@ def senior():
     else:
         return "invalid request"
 
-@app.route('/unknown', methods=['GET'])
-def unknown():
+@app.route('/unk', methods=['GET'])
+def unk():
     if request.method == 'GET':
         db_name = open_database("../database/jobs.db")
         if db_name != None:
