@@ -39,7 +39,10 @@
         </form>
 
         <!-- Display container for the returned data -->
-        <div id="result-container"></div>
+        <div id="result-container">
+            <button class="btn btn-primary" id="juniorButton" style="display: none;">junior</button>
+            <button class="btn btn-primary" id="seniorButton" style="display: none;">senior</button>
+        </div>
 
         <script>
             // Function to display the returned data
@@ -48,17 +51,21 @@
 
                 if (!keywords || keywords.length === 0) {
                     resultContainer.innerHTML = `<p><br>No keywords found.</p><br>`;
+                    document.getElementById('juniorButton').style.display = 'none';
+                    document.getElementById('seniorButton').style.display = 'none';
                     return;
                 }
 
-                const formattedKeywords = keywords.map((keyword) => {
-                    return `<a href="${keyword.link}" target="_blank" class="visited-link">${keyword.name}</a><br>`;
-                });
+                    const formattedKeywords = keywords.map((keyword) => {
+                        return `<a href="${keyword.link}" target="_blank" class="visited-link">${keyword.name}</a> (${keyword.lvl})<br>`;
+                    });
 
-                const resultHTML = `<p><br>Jobs that match your search:<br><br>${formattedKeywords.join('')}</p>`;
+                    const resultHTML = `<p><br>Jobs that match your search:<br><br>${formattedKeywords.join('')}</p>`;
 
-                resultContainer.innerHTML = resultHTML;
-            }
+                    resultContainer.innerHTML = resultHTML;
+                    document.getElementById('juniorButton').style.display = 'block';
+                    document.getElementById('seniorButton').style.display = 'block';
+                }
 
             document.querySelector('#searchForm').addEventListener('submit', function (event) {
                 event.preventDefault();
@@ -85,7 +92,29 @@
                     });
             });
 
+            document.querySelector('#juniorButton').addEventListener('click', function () {
+                const keywords = document.querySelectorAll('.visited-link');
+                keywords.forEach((keyword) => {
+                    if (keyword.innerText.toLowerCase().includes('junior')) {
+                        keyword.style.display = 'block';
+                    } else {
+                        keyword.style.display = 'none';
+                    }
+                });
+            });
+
+            document.querySelector('#seniorButton').addEventListener('click', function () {
+                const keywords = document.querySelectorAll('.visited-link');
+                keywords.forEach((keyword) => {
+                    if (keyword.innerText.toLowerCase().includes('senior')) {
+                        keyword.style.display = 'block';
+                    } else {
+                        keyword.style.display = 'none';
+                    }
+                });
+            });
         </script>
+    </div>
 
 
     </div>

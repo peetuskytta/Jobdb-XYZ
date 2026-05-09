@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from dbsearch import *
 import logging
+import re
 
 app = Flask(__name__)
 log_file = 'app.log'
@@ -18,13 +19,9 @@ def process_keywords():
     if request.method == 'POST':
         data = request.get_json()
         keywords = data.get('keywords')
-        # SANITIZE AND VERIFY CONTENT
-        keywords = keywords.split()
-
-        #client_ip = request.remote_addr
-        #current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        #app.logger.info(f'Received request at {current_time} from {client_ip}')
-
+        keywords = re.split(r'\s+', keywords)  # Split keywords by spaces
+        if not all(keyword.isalpha() for keyword in keywords):
+            return jsonify("")
         db_name = open_database("../database/jobs.db")
         if db_name != None:
             results = search_database(db_name, keywords)
