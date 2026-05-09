@@ -10,3 +10,4 @@ files/peetu.notes
 app.log
 *.sh
 report.log
+scripts/
